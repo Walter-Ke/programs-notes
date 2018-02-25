@@ -1,0 +1,48 @@
+dx
+	client 
+		取值 .GetText()
+		設值 .SetText()
+			
+		control JSProperties 命名以小寫 cp 開頭
+							 直接指定值
+		
+		e.processOnServer=false;  停止postback	
+		
+		不顯示，但元素存在
+			aspxlabel : width=0, height=0
+			aspxtextbox : style="visibility:hidden"
+			
+		radioButtonList: 取得點選index: GetSelectedIndex()
+		
+jQuery
+	ref: https://ithelp.ithome.com.tw/users/20067050/articles?page=1
+	
+	移除css
+		.css('display','')
+		
+	新增css class
+		.addClass('classname')
+	
+	尋找上一層最近的父元素
+		.closest()
+	
+	find('tr:eq(0)').text()
+	find('td:eq(0)').text()
+	
+	依符合字串尋找元素
+		$("div:contains('all string')").filter(function(){ return $(this).text() == 'all string';})
+	
+	依屬性的值尋找元素
+		$("td[title='value']").text()
+	
+	尋找屬性id的值，開頭為某字串的元素
+		$("div[id^='keyword']")
+	，結尾為某字串的元素
+		$("div[id$='keyword']")
+	，包含為某字串的元素
+		$("div[id*='keyword']")
+CSS
+	display:none
+		js無法找到內容元素
+		
+	

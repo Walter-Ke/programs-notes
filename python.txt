@@ -1,0 +1,44 @@
+install numpy & pandas for python 3.6 (32-bit)
+
+	cd C:\Users\root\AppData\Local\Programs\Python\Python36-32
+
+	numpy
+		py -3.6 -m pip install numpy-1.13.3-2-cp36-none-win32.whl
+	
+	pandas
+		pip install pandas
+	
+numpy array
+	import numpy as np
+	array = np.array([[1,2,3],[2,3,4]])
+	print('number of dimesion:', array.ndim) #維度
+	print('shape:', array.shape) 			 #行數，列數
+	print('size:', array.size)  			 #元素個數
+	
+	a = np.array([2,3,4], dtype=np.int32)
+	print(a.dtype)							#值的型別
+	a = np.array([2,3,4], dtype=np.float64)
+	print(a.dtype)
+	
+	a = zeros((3,4))						#顯示3行4列的0數值
+	print(a)
+	a = ones((3,4))							#顯示3行4列的1數值
+	print(a)
+	a = ones((3,4), dtype=np.int16)			#顯示3行4列的1數值，型別為int16
+	print (a)
+	a = empty((3,4))						#顯示接近0的數值
+	print(a)
+	
+	a = np.arange(10, 20, 2)				#顯示範圍從10至20，以2遞增：10, 12, 14, 16, 18
+	print(a)
+	a = np.arrange(10,20)
+	print(a)
+	a = np.arrange(12).reshape((3,4))		#範圍從0至12，以3行4列呈現[[0,1,2,3],[4,5,6,7],[8,9,10,11]]
+	print(a)
+	
+	a = np.linspace(1, 10, 5)				#範圍從1至10，線性分成5段
+	print(a)
+	a = np.linspace(1, 10, 6).reshape((2,3))#範圍從1至10，線性分成6段，並以2行3列呈現
+	print(a)
+	
+	

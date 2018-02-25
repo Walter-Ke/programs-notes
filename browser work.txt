@@ -1,0 +1,55 @@
+browser kernel :
+	渲染引擎  
+	javascript引擎
+
+渲染引擎
+	1.解析程式碼：
+		html 解析為 dom
+		css  解析為 cssom (css object model)
+	2.物件合成：
+		將dom和 cssom 合成一棵 渲染樹(render tree)
+	3.布局：
+		計算出渲染樹的布局 (layout), 為每個節點分配對應在螢幕上的坐標
+	4.繪制：
+		將渲染樹繪制到屏幕
+		
+	並非嚴格按順序執行，第1步還沒完成，第2,3步已開始
+	網頁html還下載完，但browser已顯示內容
+	
+	
+	render tree ->  layout  :  flow
+	
+	layout -> show : paint
+	
+	script操作、style操作，都會觸發重流(reflow)、重繪(repaint)
+	
+	reflow 必然導致 repaint，改變元素的布局，導致 reflow , repaint
+
+	優化技巧	
+		读取DOM或者写入DOM，尽量写在一起，不要混杂
+		缓存DOM信息
+		不要一项一项地改变样式，而是使用CSS class一次性改变样式
+		使用document fragment操作DOM
+		动画时使用absolute定位或fixed定位，这样可以减少对其他元素的影响
+		只在必要时才显示元素
+		使用window.requestAnimationFrame()，因为它可以把代码推迟到下一次重流时执行，而不是立即要求页面重流
+		使用虚拟DOM（virtual DOM）库
+	
+
+		function doubleHeight(element) {
+		  var currentHeight = element.clientHeight;
+
+		  window.requestAnimationFrame(function () {
+			element.style.height = (currentHeight * 2) + 'px';
+		  });
+		}
+
+		all_my_elements.forEach(doubleHeight);
+		
+	chrome: webkit 
+	
+	
+javascript引擎
+			
+	chrome: v8 (virtual machine)
+			將源碼直接轉成機器碼

@@ -1,0 +1,32 @@
+npm -v
+
+cd /project
+npm 
+	install 
+	uninstall
+	ls
+	update
+	
+npm 			-g	
+	install
+	uninstall
+	ls
+	update
+	
+npm init -y							//產生package.json
+npm install webpack --save-dev		//安裝webpack
+npm install style-loader css-loader //安裝style-loader,css-loader
+npm install file-loader url-loader  //安裝圖片相關loader
+
+webpack ./entry.js bundle.js		//轉出bundle.js
+
+
+webpack ./entry.js bundle.js --module-bind "css=style-loader!css-loader"
+
+webpack --progress --colors --watch	//watch mode，依webpack.config.js執行
+
+npm install webpack-dev-server 		//watch server	，依webpack.config.js執行
+webpack-dev-server --progress --colors
+http://localhost:8080/webpack-dev-server/bundle
+
+

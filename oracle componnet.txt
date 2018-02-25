@@ -1,0 +1,33 @@
+Oracle DB manager
+	sql developer
+
+
+connect to oracle db 
+Windows 64-bit install:
+
+	1. ODAC
+	2. ODT(Oracle Developing Tools) for VS 201X
+		
+	lsnrctl status
+	
+	
+ASP.NET	Entity Framework Model for visual studio 2013
+project NuGet package install
+	
+	1. Official Oracle ODP.NET, Managed Entity Framework Driver
+	2. Official Oracle ODP.NET, Managed Driver
+	3. Entity Framework
+	
+oracle connection
+
+	string connectionString = 
+		WebConfigurationManager.ConnectionStrings["connectionStringName"].ConnectionString
+
+	using (OracleConnection conn = new OracleConnection(connectionString)
+	{
+		OracleDataAdapter oda = new OracleDataAdapter(sql, conn);
+		conn.open();
+		DataSet ds = new DataSet();
+		oda.Fill(ds,"PRODUCT");
+	}
+	

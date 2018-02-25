@@ -1,0 +1,83 @@
+--1.查看总消耗时间最多的前10条SQL语句 
+select *
+  from (select v.sql_id,
+	  v.child_number,
+	  v.sql_text,
+	  v.elapsed_time,
+	  v.cpu_time,
+	  v.disk_reads,
+	  rank() over(order by v.elapsed_time desc) elapsed_rank
+          from v$sql v) a
+ where elapsed_rank <= 10;
+
+ --2.查看CPU消耗时间最多的前10条SQL语句 
+select *
+  from (select v.sql_id,
+	  v.child_number,
+	  v.sql_text,
+	  v.elapsed_time,
+	  v.cpu_time,
+	  v.disk_reads,
+	  rank() over(order by v.cpu_time desc) elapsed_rank
+          from v$sql v) a
+ where elapsed_rank <= 10;
+
+ 
+--3.查看消耗磁盘读取最多的前10条SQL语句 
+select *
+  from (select v.sql_id,
+	  v.child_number,
+	  v.sql_text,
+	  v.elapsed_time,
+	  v.cpu_time,
+	  v.disk_reads,
+	  rank() over(order by v.disk_reads desc) elapsed_rank
+          from v$sql v) a
+ where elapsed_rank <= 10;
+ 
+ 
+ --查询耗时 SQL
+ select * from (  
+    select * from V$SQLSTATS  
+      
+    -- 最耗时的 SQL  
+    -- ELAPSED_TIME 指的是总耗时（毫秒），平均耗时 = ELAPSED_TIME/EXECUTIONS  
+    -- order by ELAPSED_TIME DESC  
+      
+    -- 查询执行次数最多的 SQL  
+    -- order by EXECUTIONS DESC  
+      
+    -- 读硬盘最多的 SQL  
+    -- order by DISK_READS DESC  
+      
+    -- 最费 CPU 的 SQL  
+    -- order by BUFFER_GETS DESC  
+) where rownum <=50;  
+ 
+ 
+ 
+ -- 查询SQL语句执行的耗时和执行时间
+select a.sql_text SQL语句, 
+       b.etime 执行耗时, 
+       c.user_id 用户ID,
+       c.SAMPLE_TIME 执行时间, 
+       c.INSTANCE_NUMBER 实例数,
+       u.username 用户名, a.sql_id SQL编号
+  from dba_hist_sqltext a,
+       (select sql_id, ELAPSED_TIME_DELTA / 1000000 as etime
+          from dba_hist_sqlstat
+         where ELAPSED_TIME_DELTA / 1000000 >= 30) b,
+       dba_hist_active_sess_history c,
+       dba_users u
+ where a.sql_id = b.sql_id
+   and u.username in ( 'IPM_AP', 'IPM_ADMIN')
+   and c.user_id = u.user_id
+   and b.sql_id = c.sql_id
+   --and a.sql_text like '%IN%'
+   AND ROWNUM >= 10
+ order by  SAMPLE_TIME desc,  b.etime desc;
+
+
+--注释： ELAPSED_TIME_DELTA / 1000000 >= 1   为执行时间大于等于1秒的sql
+--          and u.username = 'XXX'           XXX为用户名，必须大写
+--           and a.sql_text like '%IN%'      包含IN的sql

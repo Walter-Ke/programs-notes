@@ -1,0 +1,16 @@
+npm install gulp
+
+npm install jshint
+npm install gulp-jshint	 //檢查javascript語法
+
+npm install gulp-uglify  //壓縮js檔案，2017.4不支援ES6
+
+npm install gulp-concat	 //多個檔案合併成一個
+
+
+
+
+已完成的專案在新環境執行
+
+npm install -l			//安裝模組
+

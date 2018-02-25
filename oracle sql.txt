@@ -1,0 +1,143 @@
+oracle連線字串
+D:\oracleHome\x64\product\11.2.0\client_1\network\admin
+
+產生臨時表格
+WITH temp_table_name AS (SELECT * FROM table_name)  
+
+取得目前系統時間
+SELECT sysdate FROM table_name;
+
+更改目前session日期顯示格式
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+SELECT TO_CHAR(sysdate, 'YYYY/MM/DD') FROM table_name;
+
+取得星期幾, Sunday=1, Monday=2
+SELECT TO_CHAR(sysdate, 'D') FROM table_name;
+
+SELECT TO_CHAR(TO_DATE('2017/11/11'),'D') FROM table_name
+
+DDD 一年的第幾天
+SELECT TO_CHAR(sysdate,'DDD') FROM table_name;
+
+WW 一年的第幾週
+SELECT TO_CHAR(sysdate,'WW') FROM table_name;
+
+W 一月的第幾週
+SELECT TO_CHAR(sysdate,'W') FROM table_name;
+
+YYYY/MM/DD HH24:MI:SS AM 
+SELECT TO_CHAR(sysdate,'YYYY/MM/DD HH24:MI:SS AM') FROM table_name;
+
+字串轉成日期格式
+to_date('2017/01/01 00:00:00','YYYY/MM/DD HH24:MI:SS')
+
+SELECT * FROM table_name WHERE part = :PART
+
+
+以employee_id將money全部累加彙總
+SELECT employee_id, dept_id, money, 
+SUM(money) over (order by employee_id) AS sum 
+FROM table_name;
+emplyee_id, dept_id, money, sum
+1			100		 10000	10000
+2			100		 15000	25000
+3			100		 20000	45000
+
+
+以dept_id分類，再按employee_id將money分類累加彙總
+SELECT employee_id, dept_id, money, 
+SUM(money) over (partition by dept_id order by employee_id) AS sum
+FROM table_name;
+emplyee_id, dept_id, money, sum
+1			100		 10000	10000
+2			100		 15000	25000
+3			100		 20000	45000
+4			200		 32000	32000
+5			200		 40000	72000
+6			200		 35000 107000
+
+ROW_NUMBER() OVER (ORDER BY 排序欄位)
+Dept	No
+A 		001
+A 		005
+A 		007
+B 		002
+B 		004
+B 		006
+B		003
+SELECT Dept, No, ROW_NUMBER OVER (ORDER BY No) as 順序 FROM 公司
+Dept	No	順序
+A		001	1
+A		005	5
+A		007 7
+B		002	2
+B		004	4
+B		006	6
+B		003	3
+SELECT Dept, No, ROW_NUMBER OVER (PARTITION BY Dept ORDER BY No) as 順序 FROM 公司
+Dept	No	順序
+A		001	1
+A		005	2
+A		007	3
+B		002	1
+B 		004	2
+B		006 3
+B		003 4
+
+SUM(MONEY) OVER (PARTITION BY Dept) AS TOTAL
+依Dept分組加總MONEY
+ID	Dept MONEY  TOTAL
+1	100	15000	35000
+2	100	20000	35000
+3	200	32000	107000
+4	200	40000	107000
+5	200	35000	107000
+
+SUM(COLUMN1) OVER (PARTITON BY COLUMN2 ORDER BY COLUMN3) AS SUM
+依COLUMN2分組並依COLUMN3累計加總
+ID	Dept MONEY  SUM
+1	100	15000	15000
+2	100	20000	35000
+3	200	32000	32000
+4	200	40000	72000
+5	200	35000	107000
+
+AVG(MONEY) over(PARTITION by Dept ) as AVG
+依Dept分組將MONEY加總平均
+ID	Dept MONEY  AVG
+1	100	15000	17500
+2	100	20000	17500
+3	200	32000	35666.6666666666666666666666666666666667
+4	200	40000	35666.6666666666666666666666666666666667
+5	200	35000	35666.6666666666666666666666666666666667
+
+AVG(MONEY)  over(PARTITION by Dept ORDER BY ID) as AVG
+依Dept分組並將MONEY依ID依序加總平均
+ID	Dept MONEY  AVG
+1	100	15000	15000
+2	100	20000	17500
+3	200	32000	32000
+4	200	40000	36000
+5	200	35000	35666.6666666666666666666666666666666667
+
+
+//列出所資料庫名稱、資料表名稱、欄位、型態、長度、精確度、預設值、允許null值與否、註記
+SELECT
+  C.OWNER, C.TABLE_NAME, C.COLUMN_ID, C.COLUMN_NAME,
+  DATA_TYPE, DATA_LENGTH, DATA_PRECISION, DATA_DEFAULT,
+  NULLABLE, COMMENTS
+FROM
+  ALL_TAB_COLUMNS C
+  JOIN ALL_TABLES T 
+	ON C.OWNER = T.OWNER AND C.TABLE_NAME = T.TABLE_NAME
+  LEFT JOIN ALL_COL_COMMENTS R 
+	ON C.OWNER = R.Owner AND C.TABLE_NAME = R.TABLE_NAME AND C.COLUMN_NAME = R.COLUMN_NAME
+WHERE C.OWNER=:p0 AND C.TABLE_NAME =:p1
+ORDER BY C.TABLE_NAME, C.COLUMN_ID
+
+:p0=>資料庫名稱
+:p1=>所要找尋的Table名稱
+
+oracle資料型別對應C#.NET:
+https://msdn.microsoft.com/zh-tw/library/cc716726(v=vs.110).aspx

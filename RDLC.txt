@@ -1,0 +1,37 @@
+ASP.NET RDLC report
+
+ReportViewer.LocalReport.ReportPath = Server.MapPath("rdlc_report_path");
+ReportViewer.LocalReport.DataSources.Clear();
+ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("dataSet_Name",dataTable));
+ReportViewer.LocalReport.Refresh();
+
+
+ 固定欄位：
+	資料列/行 群組 -> 進階模式 -> 靜態 -> 屬性 -> fixed data = TRUE, KeepTogether = true
+	欄位寬度：要設成比資料值的長度大，不然移動會造成不一樣寬度重疊
+	
+ 只顯示一頁：
+	報表 屬性 -> InteractiveSize. Height : 0
+	
+
+ chart:
+	 軸屬性：
+		軸選項：
+			值範圍相差甚大，勾選「啟用刻度斷層」(Enable scale breaks)
+	
+			Enable variable interval : 允許間距變動
+	
+			X軸顯示所有資料，interval(間隔)：1, labelInterval(標籤間隔):1, 主要刻度間隔:1
+	
+	Chart Axis :
+		OffsetLabels:true, LabelAutoFitDisabled : 坐標軸值 上下交錯
+	Chart:
+		DynamicWidth: 動態寬度設定： 1+ ( rownumber("資料集名稱") / 2 ) & "in"
+	
+	值(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)
+	
+
+		
+		
+	
+	

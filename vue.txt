@@ -1,0 +1,15 @@
+data binding:
+	瀏覽器內的HTML與Object的繫結
+	將『從伺服器端透過AJAX呼叫，被以JSON格式傳遞到瀏覽器之後的JavaScript Object』，與『HTML UI』Template之間的資料繫結
+	json format javascript object bind on html ui template
+
+資料將是由SERVER端以json格式傳到前端(SPA架構)
+UI資料，不會直接與SERVER互動，而是在瀏覽器的記憶體內與HTML UI互動
+	
+
+邏輯重用性
+分工維護簡易
+跨平台(mobile)
+
+	
+<span v-bind:title="message">

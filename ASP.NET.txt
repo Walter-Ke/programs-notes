@@ -1,0 +1,70 @@
+連線字串
+	WebConfigurationManager.ConnectionStrings["ConnectionStrings_Name"].ToString();
+
+
+//資料庫連線
+	public static DataSet ExcuteDataSet(string connString, CommandType cmdType, string cmdText, params OracleParameter[] cmdParams)
+	{
+		DataSet ds = null;
+
+		try
+		{
+			using (var cn = new OracleConnection(connString))
+			{
+				using (var cmd = new OracleCommand())
+				{
+					if(cn.State!=ConnectionState.Open)
+						cn.Open();
+
+					cmd.Connection = cn;
+					cmd.CommandText = cmdText;
+					if (cmdParams != null)
+					{
+						foreach (OracleParameter item in cmdParams)
+						{
+							cmd.Parameters.Add(item);
+						}
+					}
+					
+					using( var adapter = new OracleDataAdapter(cmd))
+					{
+						ds = new DataSet();
+						adapter.Fill(ds);
+					}
+				}
+			}
+		}
+		catch (OracleException ex){}
+		finally
+		{
+			if (null != cn)
+			{
+				cn.Close();
+				cn = null;
+			}
+		}
+		return ds;
+	}
+
+	
+Site.Master:
+	<asp:ContentPlaceHolder ID="cphMainContent" runat="server"/>
+Default.aspx:
+	<asp:Content ID="Content" ContentPlaceHolderID="cphMainContent" runat="server">
+	</asp:Content>	
+	
+
+控制項：
+	//dropDownList加入項目清單
+		List<ListItem> list = new List<ListItem>();
+		foreach(var item in q){
+			ListItem li = new ListItem(item.name.Trim(), item.code.Trim());
+			list.Add(li);
+		}
+		ddlControl.Items.AddRange(list.ToArray());
+
+
+		//dropDownList選取某個Index(效能較好)
+		ddlControl.SelectIndex = ddlControl.Items.IndexOf(ListItem);
+		ddlControl.SelectIndex = ddlControl.Items.IndexOf(ddlControl.Items.FindByValue("value"));
+	

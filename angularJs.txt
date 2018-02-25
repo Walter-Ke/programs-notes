@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+
+<ul>
+	<li ng-repeat="x in array">{{$index+1}} {{x}}</li>
+</ul>
+
+<input type="checkbox" ng-model="check" ng-true-value="true" ng-false-value="false">
+

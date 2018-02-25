@@ -1,0 +1,12 @@
+{	
+	name : 	value
+}
+
+the format of the value : string or []
+
+object format : {}
+array  format : []
+
+
+object in the array format [ { } ]
+

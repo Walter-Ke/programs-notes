@@ -1,0 +1,3 @@
+add element in the array:
+	array.push(item1, item2, itemX)
+	

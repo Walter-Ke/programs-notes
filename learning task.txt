@@ -1,0 +1,41 @@
+﻿angular.js
+node.js
+
+webpack
+gulp
+git
+
+asp.net c#
+	
+	web form	grammer	linq	oracleConnect
+	web api						enterprise library
+	mvc
+	
+android app
+	java
+	brocastReceiver
+	service
+	sqlite
+	content provider
+	activity lifecycle
+	
+	soft reference 
+	weak reference
+
+	targetSdkVersion buildToolsVersion
+	
+python
+	numpy
+	pandas
+
+
+	vue.js
+	php
+	django
+
+機器學習
+
+
+
+
+

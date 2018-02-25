@@ -1,0 +1,15 @@
+基礎教學
+http://tw.gitbook.net/html/database/index.html
+http://tw.gitbook.net/plsql/plsql_collections.html
+
+
+https://livesql.oracle.com/apex/livesql/file/content_C31FOQHV7EF6QNRZZADJB57A2.html
+
+http://py3939.pixnet.net/blog/post/25731082-oracle-bulk_collect-and-forall
+
+https://docs.oracle.com/cd/B14117_01/appdev.101/b10807/13_elems045.htm
+
+cursor用法
+http://www.cnblogs.com/sc-xx/archive/2011/12/03/2275084.html
+http://iamferrari.pixnet.net/blog/post/32446718-%5Bd2k%5Doracle%E6%95%B8%E6%93%9A%E5%BA%AB%E6%B8%B8%E6%A8%99%E4%BD%BF%E7%94%A8
+

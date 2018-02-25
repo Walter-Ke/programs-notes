@@ -1,0 +1,147 @@
+設定
+	git config --list
+	git config --global user.name "user name"
+	git config --global user.email "email address"
+	
+	git config --global core.editor "\"外部編輯器路徑\""	#
+	git config --global core.quotepath off					#顯示中文
+	
+	git config --global alias.別名 '指令'
+
+	
+新增儲存庫
+	git init					#初始化repository
+	git clone 網址	資料夾名稱  #複製遠端儲存庫, 只會複製master
+	
+
+	
+增加檔案
+	git add	.					#加入索引
+	git status					#檢查狀態
+	git commit -m '修改記錄'	#提交更新
+記錄	
+	git log						#查詢紀錄
+	git log --graph --oneline	#以圖形呈現並簡化紀錄
+	
+
+	
+忽略
+	.gitignore					#忽略檔案
+		*.test					#忽略副檔名是test
+		test/					#忽略資料夾
+	# https://github.com/github/gitignore	各語言忽略檔案目錄
+
+
+
+改寫提交
+	git commit --amend			#修改當下提交紀錄
+	
+	git cherry-pick 前4碼 		#將其他分支的某個提交紀錄複製到master分支，內容也是
+	git add 檔案名稱
+	git commit
+	
+	git merge --squash 分支名稱 #將分支的所有提交合併成一個提交並複製到master分支
+	
+	
+還原	
+	git revert HEAD 			#取消上一次的提交並記錄
+	
+	git reset HEAD				#取消索引 git add .
+	git reset HEAD 檔案名稱		#取消索引 git add 檔案名稱
+	
+	git reset --hard			#還原工作目錄與索引，與最後一次commit的狀態相同
+
+	git reset --hard "HEAD^"	#刪除最近一次的commit
+	git reset --soft "HEAD^"	#刪除最近一次commit，但保留異動內容
+	
+	git reset --hard ORIG_HEAD	#還原異動上一次的commit
+	git reflog					#列出所有的異動head
+
+
+	git checkout 檔案名稱 		#還原檔案，恢復單一檔案到最新的commit狀態
+	git checkout				#commit之前的異動清單
+	git checkout 前4碼			#回到指定的commit狀態
+	git checkout 分支名稱		#切換到分支
+	git checkout -b 分支名稱  	#同時建立分支並切換到分支
+	
+^ caret 第幾個父提交
+~ tilde 第幾個祖先提交
+HEAD^2 旁支是第2個父提交
+*\
+| * 	
+*
+  
+ 分支	
+	git branch -a				#顯示所有本地端、遠端分支清單
+	git branch 分支名稱			#建立分支
+	git branch -d 分支名稱		#刪除分支
+	git branch -v 				#列出所有分支最後一個提交
+	git branch -merged 			#列出已被合併到目前分支
+	git branch --no-merged		#列出所有未合併的分支
+	
+	
+合併
+	git merge 分支名稱
+	git merge --no-ff 分支名稱 	#非使用fast-forward
+rebase	
+	git rebase master
+	git add 檔案名稱
+	git rebase --continue
+	git checkout master
+	git merge 分支名稱
+	
+保留分支使用 merge
+不保留使用	 rebase		
+	
+	
+	
+標籤
+	git tag 					#查詢標籤
+	git tag -n 					#列出標籤清單
+	git show 標籤名稱			#查詢某標籤詳細資訊
+	git tag -d 標籤名稱			#刪除標籤
+	git tag 標籤名稱			#新增標籤
+	git tag -a 標籤名稱 -m '備註內容' 
+	
+	
+暫存
+	git stash					#暫存，新增檔案且還沒staged，沒有效果，
+	git stash list				#暫存列表
+	git stash pop				#取出暫存
+	git stash drop				#清除最新暫存
+	git stash clear				#清除全部暫存
+	
+
+遠端
+	git remote -v					#列出遠端數據庫, -v:顯示url
+	git remote add 遠端主機名稱 URL
+	git remote rename 原名稱 修改名稱
+	git remote show 遠端主機名稱	#檢視遠端資訊
+	
+推送
+	git push 遠端主機名稱(origin) 本地端分支名稱 
+	git push 遠端主機名稱(origin) 標籤名稱
+	
+下載
+	git clone URL 下載目錄		#只會複製master分支
+	
+	#(先建立本地端分支)下載遠端資料庫的分支到本地端分支，切換主要分支，再合併
+	git fetch 遠端主機名稱(origin) 遠端分支名稱:本地端分支名稱 
+	git merge 本地端分支名稱
+	
+	git pull 
+	
+	
+
+	
+	
+	
+	
+					add							commit
+workingDirectory				stagingArea					LocalRepository
+					reset HEAD					revert HEAD			
+					
+							
+ 
+ 
+ 

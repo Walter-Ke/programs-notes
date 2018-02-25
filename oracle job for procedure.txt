@@ -1,0 +1,64 @@
+查詢 job_queue_processes : oracle 允許執行的最大任務數量
+select value from v$parameter where   name='job_queue_processes';
+
+修改 允許執行的最大任務數量 n
+alter system set job_queue_processes=n;
+
+查詢背景執行程序
+select name, description from v$bgprocess;
+
+
+查詢執行程序
+select * from user_jobs;
+
+
+移除程序
+begin
+dbms_job.remove(141);
+end;
+/
+
+
+暫停程序
+begin
+  dbms_job.broken([jobs: 程序#], [broken: true/false], [next_date: 下次一執行日期時間]);
+end;
+/
+next_date未指定時, 預設為目前的日期時間
+begin
+  dbms_job.broken(158, true);
+end;
+/
+
+
+恢復執行程序
+begin
+  dbms_job.broken(158, false, sysdate);
+end;
+/
+
+
+強制執行程序(不論是否已設定broken)
+begin
+  dbms_job.run(158, true);
+end;
+/
+
+
+透過修改, job no不會一直變動, 若是透過移除重建, job no則會一直變更及增加
+DBMS_JOB.CHANGE ( 
+   job       IN  BINARY_INTEGER,
+   what      IN  VARCHAR2,
+   next_date IN  DATE,
+   interval  IN  VARCHAR2,
+   instance  IN  BINARY_INTEGER DEFAULT NULL,
+   force     IN  BOOLEAN DEFAULT FALSE);
+
+begin  dbms_job.Change(
+ 5,
+ 'SP_ORDER_INFO;',
+ to_date(to_char(sysdate, 'yyyy/mm/dd') || ' 07:50:00', 'yyyy/mm/dd hh24:mi:ss'),
+ 'to_date(to_char(sysdate, ''yyyy/mm/dd'') || '' 07:50:00'', ''yyyy/mm/dd hh24:mi:ss'')+1'
+);
+end;
+/

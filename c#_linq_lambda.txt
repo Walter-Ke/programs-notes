@@ -1,0 +1,102 @@
+Linq 
+inner join 
+
+	var clients = from c in ctx.Clients
+			  from g in ctx.Gruops
+			  where c.GroupID == g.ID
+			  orderby g.Name
+			  select new 
+			  {
+				c.groupID,
+				c.ComputerName,
+				GroupName = g.Name
+			  };
+
+	var clients = from c in ctx.Clients
+			  join g in ctx.Groups
+			  on c.GroupID = g.ID into result
+			  from r in result
+			  orderby r.Name
+			  select new 
+			  {
+				c.groupID,
+				c.ComputerName,
+				GroupName = r.Name
+			  };
+			  
+left join
+		
+	var client = from c in ctx.Clients
+				 where c.Status ==1
+				 select new 
+				 {
+					c.groupID,
+					c.ComputerName,
+					GroupName = (from g in ctx.Groups
+								 where g.ID == c.GroupID
+								 select g.Name).FirstOrDefault()
+				 };
+	
+
+count 
+
+		var result = from c in ctx.Clients
+					 group c by c.Status into r
+					 orderby r.Count() desceding
+					 select new {
+						status = r.Key,
+						Count = r.Count()
+					 };
+
+					
+Lambda 
+inner join 		  
+
+	var clients = ctx.Clients.Where(c => c.Status ==1)
+						 .Join(ctx.Groups, 		  //要加入的來源
+							   c => c.GroupID,    //主表要join的值
+							   g => g.ID,         //次表要join的值
+						       (c,g) => new 	  //(c,s)代表將資料集合起來
+							   {
+									c.groupID,
+									c.ComputerNamae,
+									GroupName = g.Name
+							   })
+						 .OrderBy( cg => cg.GroupName)
+						 .ToList();
+	
+left join 
+	
+	var clients = ctx.Client.Where(c=>c.Status ==1)
+							.Select( c=> new
+							{
+								c.GroupID,
+								c.ComputerName,
+								GroupName = ctx.Groups.FirstOrDefault(g=>g.ID==c.GroupID).Name
+							})
+							.ToList();
+							
+
+count 
+	
+	var client = ctx.Clients.GroupBy(c=>c.Status)
+							.Select(s=>new{
+								Status = s.Key,
+								Count = s.Count()
+							})
+							.OrderByDescending(r=>r.Count);
+
+
+Trace SQL
+							
+using (var ctx = new TestDBEntities)
+{
+	var query = ctx.Clients.Where(c=> c.Status==1)
+							.OrderBy(c=>c.ComputerName);
+							
+	Debug.WriteLine((query as ObjectQuery).ToTraceString());
+	
+	foreach( var client in query)
+	{
+	}
+}							

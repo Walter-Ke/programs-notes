@@ -1,0 +1,39 @@
+web design	MCSD70-480
+
+front		javascript
+		vue.js
+		
+backend	
+		django
+
+
+android 	java/android studio
+		
+
+windows		c#
+		
+
+
+
+.  shell 		centOS 		LPIC 1		
+		
+
+.  Javascript	 	node.js, angular.js    MCSD 70-480	web design
+
+.  python	 	django
+
+
+.  android/ios app	
+
+
+
+.  TOEIC
+
+
+.  Execise Time 	
+
+
+
+
+
+
