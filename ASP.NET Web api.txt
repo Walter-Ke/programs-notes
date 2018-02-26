@@ -1,0 +1,117 @@
+建立WEB API方式
+
+	https://blog.yowko.com/2017/07/create-aspnet-web-api.html
+	
+0.      .NET4.0:  只能使用Web API 
+		.NET4.5   使用Web API 2.X
+	
+1-1.	使用「Microsoft.AspNet.WebApi」套件  (非使用範本專案)
+			for .net4.0 - Nuget: Install-Package Microsoft.AspNet.WebApi -Version 4.0.30506
+								Microsoft.Web.Infrastructure.dll
+								Newtonsoft.Json.dll
+								System.Net.Http.Formatting.dll
+								System.Web.Http.dll
+								System.Web.Http.WebHost.dll
+		
+		
+1-2.	使用「Microsoft.AspNet.WebApi.Core」套件 (使用Owin) (非使用範本專案)
+
+			OWIN (Open Web Interface for .NET)
+				
+				不依賴System.Web.dll ，即不局限於IIS，放在console程式裡跑Self-Hosting模式
+
+				http://blog.darkthread.net/post-2013-12-01-about-owin.aspx
+				
+				.NET 4.0 使用「Microsoft ASP.NET Web API Self Host」套件
+				
+				https://docs.microsoft.com/zh-tw/aspnet/web-api/overview/older-versions/self-host-a-web-api
+				http://blog.darkthread.net/post-2013-06-04-self-host-web-api.aspx
+
+
+
+2.	新增資料夾：App_Start
+	新增類別：	WebApiConfig.cs
+
+	public static class WebApiConfig{
+	
+		public static void Register(HttpConfiguration config){
+			
+			config.Routes.MapHttpRoute(
+				name:	"DefaultApi",
+				routeTemplate:	"api/{controller}/{action}/{id}",
+				default:	new{ action = routeParameter.Optional, id= RouteParameter.Optional}
+			);
+			
+			//移除回傳至網頁為xml格式
+			config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+			
+			//newtonsoft對json資料使用混合大小寫，與屬性名稱相同
+			config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = 
+				new DefaultContractResolver();
+				
+			//可对具有 IQueryable 或 IQueryable<T> 返回类型的操作启用查询支持
+            //config.EnableQuerySupport();
+
+            // 若要在应用程序中不禁用跟踪
+            //config.EnableSystemDiagnosticsTracing();
+		}
+	}
+	
+	
+	
+3.	新增資料夾:Controllers
+	新增類別: TestController
+	
+	public class TestController: ApiController{
+		
+		public Dictionary<string,string> get()
+		{
+			var result = new Dictionary<string, string>(){
+				
+				{"1","apple"},
+				{"2","google"},
+				{"3","oppo"}
+			};
+			return result;
+			
+		}
+		
+		[HttpGet, HttpPost]// 讓此方法可同時接受 HTTP GET 和 POST 請求.
+		public HttpResponseMessage getNonJson(){
+			
+			string json = JsonConvert.SerializeObject(data);
+			var result = new HttpResponseMessage(HttpStatusCode.OK);
+			
+			result.Content = new ByteArrayContent(data);
+			result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+			return result;
+		}
+	}
+	
+
+4.  呼叫：	localhost:8008/api/test/get
+			localhost:8008/api/test/getNonJson
+	
+
+5.	回傳內容： https://www.huanlintalk.com/2013/01/aspnet-web-api-and-json.html	
+
+	//文字:StringContent
+	
+	//二進位:ByteArrayContent, StreamContent, MultipartContent  	
+	//reference: System.Net.Http.HttpContent
+	
+	//自訂型別的物件：Request.CreateResponse()
+	[HttpGet]
+	public HttpResponseMessage Get()
+	{
+		var result = new 
+		{
+			UserName = "Michael",
+			City = "Taipei"
+		};
+		return Request.CreateResponse(HttpStatusCode.OK, result);
+	}
+	
+
+
+	
