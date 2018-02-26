@@ -1,0 +1,18 @@
+自我安裝 ASP.NET Web API 
+
+	Microsoft.AspNet.WebApi.SelfHost (不使用IIS)
+	.NET 4.0 (2010)
+		Nuget: Install-Package Microsoft.AspNet.WebApi.SelfHost -Version 4.0.30506
+
+	Microsoft ASP.NET Web API 2.2 OWIN Self Host
+
+
+	Microsoft.AspNet.WebApi.WebHost (使用IIS)
+	.NET 4.0 (2010)	
+		Nuget: Install-Package Microsoft.AspNet.WebApi.WebHost -Version 4.0.30506
+		
+	Microsoft ASP.NET Web API 2.2 Web Host
+	
+		Install-Package Microsoft.AspNet.WebApi.WebHost -Version 5.2.3
+	
+	
