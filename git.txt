@@ -13,6 +13,11 @@
 	git init					#初始化repository
 	git clone 網址	資料夾名稱  #複製遠端儲存庫, 只會複製master
 	
+	網址含帳密：https://username:pwd@xxx.xxx.git
+	
+	帳密含有如下特殊字元，須改成如下
+	!   #   $    &   '   (   )   *   +   ,   /   :   ;   =   ?   @   [   ]
+	%21 %23 %24 %26 %27 %28 %29 %2A %2B %2C %2F %3A %3B %3D %3F %40 %5B %5D
 
 	
 增加檔案
