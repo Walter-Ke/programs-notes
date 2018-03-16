@@ -18,6 +18,10 @@ dx
 						 
 		若預設屬性要修改，如設定css，必須在後端處理，否則postback回來，仍還原成預設值!!
 		
+		ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = false;
+		
+		
+		
 jQuery
 	ref: https://ithelp.ithome.com.tw/users/20067050/articles?page=1
 	
