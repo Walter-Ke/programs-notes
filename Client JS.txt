@@ -3,8 +3,8 @@ dx
 		取值 .GetText()
 		設值 .SetText()
 			
-		control JSProperties 命名以小寫 cp 開頭
-							 直接指定值
+		server control.JSProperties["cpXXX"] 命名以小寫 cp 開頭
+											 直接指定值
 		
 		e.processOnServer=false;  停止postback	
 		
@@ -13,34 +13,81 @@ dx
 			aspxtextbox : style="visibility:hidden"
 			
 		radioButtonList: 取得點選index: GetSelectedIndex()
+					     清空點選: SetSelectedItem(null)
+						 
+						 
+		若預設屬性要修改，如設定css，必須在後端處理，否則postback回來，仍還原成預設值!!
 		
 jQuery
 	ref: https://ithelp.ithome.com.tw/users/20067050/articles?page=1
 	
-	移除css
-		.css('display','')
+	selector
+		$("元素[屬性1='值1'][屬性2='值2']")
 		
-	新增css class
-		.addClass('classname')
+			依屬性的值尋找元素
+				$("td[title='value']").text()
+			
+			尋找屬性id的值，開頭為某字串的元素
+				$("div[id^='keyword']")
+			，結尾為某字串的元素
+				$("div[id$='keyword']")
+			，包含為某字串的元素
+				$("div[id*='keyword']")
+
+		依符合字串尋找元素
+			$("div:contains('all string')").filter(function(){ return $(this).text() == 'all string';})
+		
 	
-	尋找上一層最近的父元素
-		.closest()
+	Traverse
+		尋找上一層最近的父元素
+			.closest()
+		
+		find('tr:eq(0)').text()
+		find('td:eq(0)').text()	
+		
+		$element.map(function(val){
+				return 
+			});
 	
-	find('tr:eq(0)').text()
-	find('td:eq(0)').text()
+	Attribute
+		移除css屬性值
+			.css('display','')
+			
+		新增/移除css class
+			.addClass('classname')
+			.removeClass('classname')
+			
+		
+	.ajax()
+		contentType: 'application/json'    //傳送內容至伺服端的格式
+		dataType: 'json'				   //傳回至客戶端的格式	
+		data: JSON.stringify(para)		   //傳送至伺服端的參數	
+
+js	
+	//判斷數值
+		isNaN(value) === false  為數值
+
+
+	//顯示yes or no對話方塊
+		if(confirm('msg')){ 
+			yes 
+		}else{ 
+			no 
+		}
 	
-	依符合字串尋找元素
-		$("div:contains('all string')").filter(function(){ return $(this).text() == 'all string';})
+	//async / await 
+	//https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Statements/async_function
+		ES2017(ES8)
+		async function test(){
+			await func1(); //先執行 func1完，再執行func2
+			await func2();
+		}
+		
+		test().then( ()=>{} );
 	
-	依屬性的值尋找元素
-		$("td[title='value']").text()
 	
-	尋找屬性id的值，開頭為某字串的元素
-		$("div[id^='keyword']")
-	，結尾為某字串的元素
-		$("div[id$='keyword']")
-	，包含為某字串的元素
-		$("div[id*='keyword']")
+	
+	
 CSS
 	display:none
 		js無法找到內容元素

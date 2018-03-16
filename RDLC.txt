@@ -31,7 +31,10 @@ ReportViewer.LocalReport.Refresh();
 	值(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)
 	
 
-		
+RDL檔案 由 SQL SERVER REPORT BUILDER建立，
+RDLC檔案，visual studio  設計階段建置
+
+參數與資料集欄位不能相同!!
 		
 	
 	
