@@ -34,7 +34,7 @@ ReportViewer.LocalReport.Refresh();
 RDL檔案 由 SQL SERVER REPORT BUILDER建立，
 RDLC檔案，visual studio  設計階段建置
 
-參數與資料集欄位不能相同!!
+參數與資料集欄位名稱不能相同!!
 		
-	
+報表無法顯示，因為報表參數與傳入參數沒有一致!!
 	
