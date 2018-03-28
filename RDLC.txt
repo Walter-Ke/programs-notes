@@ -12,8 +12,11 @@ ReportViewer.LocalReport.Refresh();
 	
  只顯示一頁：
 	報表 屬性 -> InteractiveSize. Height : 0
-	
 
+ 多空白頁		
+	主體寬度 <= page寬度-左右邊界
+	報表 屬性 -> ConsumeContainerWhitespace: True
+ 
  chart:
 	 軸屬性：
 		軸選項：
@@ -37,4 +40,5 @@ RDLC檔案，visual studio  設計階段建置
 參數與資料集欄位名稱不能相同!!
 		
 報表無法顯示，因為報表參數與傳入參數沒有一致!!
+
 	

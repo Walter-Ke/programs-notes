@@ -1,3 +1,14 @@
+方案組態
+	Debug: 測試環境
+	Release: 線上環境
+	Debug.SiteName : SiteName
+	Replease.SiteName : SiteName
+
+發行設定檔
+	
+		
+	
+
 Web.config
 
 	system.web
