@@ -31,7 +31,7 @@ ReportViewer.LocalReport.Refresh();
 	值(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)
 	
 
-		
+	頁首/頁尾顯示資料集欄位內容，需使用參數指定值為資料集內容	
 		
 	
 	

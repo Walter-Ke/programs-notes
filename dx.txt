@@ -1,0 +1,3 @@
+控制項顯示
+	_init() 可能無法控制顯示與否
+	_onload() :  須寫於此方法中，.Visible = false/true
