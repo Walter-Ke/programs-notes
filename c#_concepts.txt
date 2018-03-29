@@ -59,6 +59,10 @@
 			
 		}		
 		
+	//string to dateTime
+		Convert.ToDateTime(string)
+
+		
 序列化：
 	[Serializable] 		  //把物件變成可在網路上傳輸的位元組流		
 	

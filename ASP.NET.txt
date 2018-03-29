@@ -67,4 +67,9 @@ Default.aspx:
 		//dropDownList選取某個Index(效能較好)
 		ddlControl.SelectIndex = ddlControl.Items.IndexOf(ListItem);
 		ddlControl.SelectIndex = ddlControl.Items.IndexOf(ddlControl.Items.FindByValue("value"));
-	
+
+UpdatePanel:
+	AsyncPostBackTrigger & ChildrenAsTriggers="false" => 
+		can be used to specify which controls inside UpdatePanel should call back rather than post back
+	PostBackTrigger & ChildrenAsTriggers="true" =>
+		allow certain controls inside UpdatePanel post back

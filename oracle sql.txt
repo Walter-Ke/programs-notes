@@ -122,7 +122,7 @@ ID	Dept MONEY  AVG
 5	200	35000	35666.6666666666666666666666666666666667
 
 
-//列出所資料庫名稱、資料表名稱、欄位、型態、長度、精確度、預設值、允許null值與否、註記
+--列出所資料庫名稱、資料表名稱、欄位、型態、長度、精確度、預設值、允許null值與否、註記
 SELECT
   C.OWNER, C.TABLE_NAME, C.COLUMN_ID, C.COLUMN_NAME,
   DATA_TYPE, DATA_LENGTH, DATA_PRECISION, DATA_DEFAULT,
@@ -141,3 +141,11 @@ ORDER BY C.TABLE_NAME, C.COLUMN_ID
 
 oracle資料型別對應C#.NET:
 https://msdn.microsoft.com/zh-tw/library/cc716726(v=vs.110).aspx
+
+
+--刪除重複資料  http://fecbob.pixnet.net/blog/post/38973507-oracle%E5%88%A9%E7%94%A8rowid%E5%88%AA%E9%99%A4%E8%A1%A8%E4%B8%AD%E9%87%8D%E8%A4%87%E8%A8%98%E9%8C%84
+1.當有大量重復資料存在並且在群組欄位(id)上有索引的情況下
+delete EQ_BOM_DETAIL_ITEMS where rowid not in (
+select max(rowid) from EQ_BOM_DETAIL_ITEMS  
+group by id
+

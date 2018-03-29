@@ -1,0 +1,40 @@
+result = from a in list
+                                     join b in list2 on new { PART_NO = a.PART_NO, DEPARTMENT = a.DEPARTMENT } equals new { b.PART_NO, b.DEPARTMENT }
+                                     join c in list3 on new { PART_NO = a.PART_NO, DEPARTMENT = a.DEPARTMENT } equals new { c.PART_NO, c.DEPARTMENT } into c1
+                                     from x in c1.DefaultIfEmpty()
+                                     select new Entity_EQDownReasonReport
+                                     {
+                                         DEPARTMENT = a.DEPARTMENT,
+                                         TYPE = a.TYPE,
+                                         PART_NO = a.PART_NO,
+                                         DESCRIPTION = a.DESCRIPTION,
+                                         DOWN_REASON = a.DOWN_REASON,
+                                         CNT = a.CNT,
+                                         TPRICE = a.TPRICE,
+                                         HIGH_STD = a.HIGH_STD,
+                                         DEPT = a.DEPT,
+                                         DIFF = a.DIFF,
+                                         COMMIT_STD_LT = a.COMMIT_STD_LT,
+                                         AVG_STD_Q3 = b.AVG_STD_Q3,
+                                         PARTS_QTY = x.PARTS_QTY == null ? new Nullable<decimal>() : x.PARTS_QTY
+                                     };
+									 
+									 
+							Dictionary<string, Entity_EQDownReasonReport_STD> dict2 =
+                                                        list2.ToDictionary(p => p.PART_NO);
+
+                            var r1 = list.Where(a => dict2.ContainsKey(a.PART_NO))
+                                .Select(a=> new {
+                                    DEPARTMENT = a.DEPARTMENT,
+                                    TYPE = a.TYPE,
+                                    PART_NO = a.PART_NO,
+                                    DESCRIPTION = a.DESCRIPTION,
+                                    DOWN_REASON = a.DOWN_REASON,
+                                    CNT = a.CNT,
+                                    TPRICE = a.TPRICE,
+                                    HIGH_STD = a.HIGH_STD,
+                                    DEPT = a.DEPT,
+                                    DIFF = a.DIFF,
+                                    COMMIT_STD_LT = a.COMMIT_STD_LT,
+                                    AVG_STD_Q3 = dict2[a.PART_NO].AVG_STD_Q3
+                                });
