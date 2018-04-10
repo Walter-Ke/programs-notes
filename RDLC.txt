@@ -32,13 +32,16 @@ ReportViewer.LocalReport.Refresh();
 		DynamicWidth: 動態寬度設定： 1+ ( rownumber("資料集名稱") / 2 ) & "in"
 	
 	值(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)
+ 
+ 矩陣:
+	形成html時，會轉成table，表格中的文字，會以div包覆，若無文字，則無，且字型大小可能為0
 	
-
+	
 RDL檔案 由 SQL SERVER REPORT BUILDER建立，
 RDLC檔案，visual studio  設計階段建置
 
-參數與資料集欄位名稱不能相同!!
+參數名稱與資料集欄位名稱不能相同!!
 		
-報表無法顯示，因為報表參數與傳入參數沒有一致!!
+報表無法顯示(空白畫面)，因為報表參數與傳入參數沒有一致!!
 
 	

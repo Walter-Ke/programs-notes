@@ -1,3 +1,8 @@
+快速鍵:
+	
+	prop  tab鍵2次  產生get set
+	
+	
 符號：
 	@"Reports\Report_Demo.rdlc"  //@: ignore \
 
@@ -34,6 +39,7 @@
 	checked
 
 	lock
+	
 	
 	
 語法：
