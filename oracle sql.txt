@@ -7,6 +7,9 @@ WITH temp_table_name AS (SELECT * FROM table_name)
 取得目前系統時間
 SELECT sysdate FROM table_name;
 
+取得下月第一天
+select TRUNC(LAST_DAY(SYSDATE))+1 FROM dual;
+
 更改目前session日期顯示格式
 ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
 
