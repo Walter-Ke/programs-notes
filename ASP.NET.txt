@@ -54,6 +54,7 @@ Default.aspx:
 	</asp:Content>	
 	
 
+	
 控制項：
 	//dropDownList加入項目清單
 		List<ListItem> list = new List<ListItem>();

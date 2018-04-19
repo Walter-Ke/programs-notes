@@ -152,3 +152,5 @@ delete EQ_BOM_DETAIL_ITEMS where rowid not in (
 select max(rowid) from EQ_BOM_DETAIL_ITEMS  
 group by id
 
+字串中將非數字取代成空白
+REGEXP_REPLACE(cloumn_name, '[^[:digit:]]', '')
