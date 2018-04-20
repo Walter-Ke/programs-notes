@@ -84,6 +84,8 @@ HEAD^2 旁支是第2個父提交
 	git branch -merged 			#列出已被合併到目前分支
 	git branch --no-merged		#列出所有未合併的分支
 	
+	git push origin :分支名稱	#刪除遠端分支
+	git fetch -p origin			#刪除遠端分支  與local同步
 	
 合併
 	git merge 分支名稱

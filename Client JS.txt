@@ -28,19 +28,24 @@ dx
 		
 		
 		//彈跳視窗顯示方法
-			ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = false;
+			ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = true;
+			ASPxPopupControl1.Hide();  -> server: ShowOnPageLoad = false;
 		
 	Server:		
 		若callback要執行前端script，無法使用ScriptManager.RegisterStartupScript，需使用dx:ASPxGlobalEvents
 		
-		<dx:ASPxGlobalEvents ID="ASPxGlobalEvents1" runat="server">
-			<ClientSideEvents EndCallback="function(s, e) {
-					test(); //呼叫寫好的function
-			}" />
-		</dx:ASPxGlobalEvents>
+			<dx:ASPxGlobalEvents ID="ASPxGlobalEvents1" runat="server">
+				<ClientSideEvents EndCallback="function(s, e) {
+						test(); //呼叫寫好的function
+				}" />
+			</dx:ASPxGlobalEvents>
 		
 		
 		若預設屬性要修改，如設定css，必須在後端處理，否則postback回來，仍還原成預設值!!
+		
+		
+		若gridview在updatepanel內，要觸發OnCustomButtonCallback，須設定 EnableCallBacks="false"，否則無法更新畫面
+		
 		
 jQuery
 	ref: https://ithelp.ithome.com.tw/users/20067050/articles?page=1

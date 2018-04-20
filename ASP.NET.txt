@@ -74,3 +74,12 @@ UpdatePanel:
 		can be used to specify which controls inside UpdatePanel should call back rather than post back
 	PostBackTrigger & ChildrenAsTriggers="true" =>
 		allow certain controls inside UpdatePanel post back
+		
+GAC
+	gacutil /l Microsoft.VisualStudio.Web.PageInspector.Runtime
+	
+		
+未能加载文件或程序集“Microsoft.VisualStudio.Web.PageInspector.Loader, Version=1.0.0.0, Cul
+	打开root web.config(在C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config中)，将这个内容的“add”改为“remove”：
+	<compilation> <assemblies> <remove assembly="Microsoft.VisualStudio.Web.PageInspector.Loader, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+	然后重新运行项目即可。		

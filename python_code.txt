@@ -1,0 +1,4 @@
+#http://yvestsai.com/2017/11/22/python-job/
+
+import requests
+from bs4 import BeautifulSoup

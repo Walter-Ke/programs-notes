@@ -1,0 +1,11 @@
+python
+
+pip程式路徑 設定系統變數
+
+pip 更新
+pip install --upgrade setuptools
+pip install ez_setup
+easy_install -U setuptools
+
+pip install requests  		#獲取目標網址的網頁原始碼，導入了requests函式庫
+pip install beautifulsoup4	#進行網頁解析及抓取資訊的函式庫
