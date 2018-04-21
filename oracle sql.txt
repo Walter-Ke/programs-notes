@@ -149,3 +149,11 @@ delete EQ_BOM_DETAIL_ITEMS where rowid not in (
 select max(rowid) from EQ_BOM_DETAIL_ITEMS  
 group by id
 
+四捨五入，小數點N位
+ROUND(變數,N) 
+
+千分位，FM是去空白用
+to_char(QTY_1, 'FM999,999,999,999,999')
+
+取代非數字
+REGEXP_REPLACE(WARNING_TIME, '[^[:digit:]]', '')
