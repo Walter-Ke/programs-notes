@@ -1,25 +1,50 @@
 dx
-	client 
-		取值 .GetText()
-		設值 .SetText()
+	Client: 
+		//取值 
+			control.GetText()
+		//設值 
+			control.SetText()
 			
-		server control.JSProperties["cpXXX"] 命名以小寫 cp 開頭
-											 直接指定值
+		//dx自訂client js 屬性
+			server control.JSProperties["cpXXX"] 命名以小寫 cp 開頭
+											     直接指定值
+		//dx自訂client js，前端使用
+			control.cpXXX 
 		
-		e.processOnServer=false;  停止postback	
+		//停止postback	
+			e.processOnServer=false;  
 		
-		不顯示，但元素存在
+		//不顯示，但元素存在
 			aspxlabel : width=0, height=0
 			aspxtextbox : style="visibility:hidden"
-			
-		radioButtonList: 取得點選index: GetSelectedIndex()
-					     清空點選: SetSelectedItem(null)
+				
+		//多選清單		
+			radioButtonList: 取得點選index: GetSelectedIndex()
+			  				 清空點選: SetSelectedItem(null)
 						 
-						 
+		
+		//設定dx元件樣式，style為HTML DOM Style Object  https://www.w3schools.com/jsref/dom_obj_style.asp
+			ASPxTextBox.GetInputElement().style
+		
+		
+		//彈跳視窗顯示方法
+			ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = true;
+			ASPxPopupControl1.Hide();  -> server: ShowOnPageLoad = false;
+		
+	Server:		
+		若callback要執行前端script，無法使用ScriptManager.RegisterStartupScript，需使用dx:ASPxGlobalEvents
+		
+			<dx:ASPxGlobalEvents ID="ASPxGlobalEvents1" runat="server">
+				<ClientSideEvents EndCallback="function(s, e) {
+						test(); //呼叫寫好的function
+				}" />
+			</dx:ASPxGlobalEvents>
+		
+		
 		若預設屬性要修改，如設定css，必須在後端處理，否則postback回來，仍還原成預設值!!
 		
-		ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = false;
 		
+		若gridview在updatepanel內，要觸發OnCustomButtonCallback，須設定 EnableCallBacks="false"，否則無法更新畫面
 		
 		
 jQuery
@@ -68,10 +93,19 @@ jQuery
 		data: JSON.stringify(para)		   //傳送至伺服端的參數	
 
 js	
+	//string to number
+	Number(string) //小數點、整數
+	
+	
 	//判斷數值
 		isNaN(value) === false  為數值
-
-
+	
+	
+	//Date判斷格式
+	if(isNaN(Date.parse(value))==true)
+		alert("格式錯誤");
+		
+		
 	//顯示yes or no對話方塊
 		if(confirm('msg')){ 
 			yes 
