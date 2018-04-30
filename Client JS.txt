@@ -28,9 +28,17 @@ dx
 			radioButtonList: 取得點選index: GetSelectedIndex()
 			  				 清空點選: SetSelectedItem(null)
 						 
+		//前端執行按鈕click
+			btn.DoClick();
+		
+		//前端按鈕html格式<input name="btnname">
+			
+		
 		
 		//設定dx元件樣式，style為HTML DOM Style Object  https://www.w3schools.com/jsref/dom_obj_style.asp
 			ASPxTextBox.GetInputElement().style
+		
+		
 		
 		
 		//彈跳視窗顯示方法
