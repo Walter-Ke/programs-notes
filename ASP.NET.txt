@@ -75,6 +75,33 @@ UpdatePanel:
 	PostBackTrigger & ChildrenAsTriggers="true" =>
 		allow certain controls inside UpdatePanel post back
 		
+updatePanel2 within updatePanel1
+	1.Set Update Mode of both update panel to "Conditional"
+	2.add ASPxButton control 
+	3.Add AsynhronousTrigger inside UpadatePanel2 and set control id to btnSave and Click event as EventName
+	4.Add your code in btnSave_Clcik evert in code behind
+	
+	<asp:UpdatePanel runat="server" id="updatePanel1" UpdateMode="Conditional">
+		<ContentTemplate>
+			<asp:UpdatePanel runat="server" id="updatePanel2" UpdateMode="Conditional">
+					<ContentTemplate>
+						<dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" >
+							<ContentCollection>
+								<dx:PopupControlContentControl>
+									<dx:ASPxButton ID="btnSave" runat="server" ClientInstanceName="btnSave" OnClick="btnSave_Clcik" Text="存檔">
+								</dx:PopupControlContentControl>
+							</ContentCollection>
+						</dx:ASPxPopupControl>	
+					</ContentTemplate>
+					<Triggers>
+						<asp:AsyncPostBackTrigger ControlID="ASPxPopupControl1$btnSave" EventName="Click" />
+					</Triggers>
+			</asp:UpdatePanel>
+		</ContentTemplate>
+	</asp:UpdatePanel>	
+	
+	
+		
 GAC
 	gacutil /l Microsoft.VisualStudio.Web.PageInspector.Runtime
 	

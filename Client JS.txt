@@ -10,6 +10,12 @@ dx
 											     直接指定值
 		//dx自訂client js，前端使用
 			control.cpXXX 
+			
+		//ASPxListBox 計算項目個數
+			listBox.GetItemCount()
+					
+		//ASPxListBox 取得項目文字
+			listBox.GetItem(i).text
 		
 		//停止postback	
 			e.processOnServer=false;  
@@ -104,6 +110,10 @@ js
 	//Date判斷格式
 	if(isNaN(Date.parse(value))==true)
 		alert("格式錯誤");
+
+		
+	//阻止呼叫此方法的當前事件，繼續執行捕獲傳遞或冒泡傳遞
+		event.stopPropagation();		
 		
 		
 	//顯示yes or no對話方塊
