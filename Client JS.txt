@@ -142,7 +142,7 @@ js
 		test().then( ()=>{} );
 	
 	
-	
+	<a href=javascript:void(function_name()) />
 	
 CSS
 	display:none

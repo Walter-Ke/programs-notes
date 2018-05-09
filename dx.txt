@@ -1,3 +1,48 @@
+callback
+	client 				  		server 						
+	script event handler  ->		
+	(async request!!) 			init 
+								load state
+								process data 
+								load 
+								callback event
+								unload
+								
+	script callback	  	  <-	callback result 
+      								
+
 控制項顯示
 	_init() 可能無法控制顯示與否
 	_onload() :  須寫於此方法中，.Visible = false/true
+	
+	
+gridview控制項
+
+	.動態綁定資料來源:
+		
+		.EnableViewState=true , https://www.devexpress.com/Support/Center/p/E321.aspx
+		
+		.當pageIndexChanged，將會觸發 grid_DataBinding()
+
+			Page_Load(){
+			
+				grid.DataBind();
+				grid.PageIndex = 0;
+			}
+			
+			protected void grid_DataBinding(){
+				grid.DataSource = ...;
+			}
+			
+		
+			protected void grid_DataBound(){ //動態更改欄位名稱
+				
+				//group 
+			}
+		
+		.當click group expand/collapse，callback/postback後，會重置，須設定 EnableRowsCache  = "false"  !!
+		 
+		 一旦設定後，page執行後端，將執行grid_DataBinding(),grid_DataBound() !!
+		 
+		 
+		
