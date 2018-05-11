@@ -9,7 +9,8 @@ callback
 								unload
 								
 	script callback	  	  <-	callback result 
-      								
+
+	只改變呼叫callback的控制項，其餘控制項無法改變值、樣式!!!
 
 控制項顯示
 	_init() 可能無法控制顯示與否

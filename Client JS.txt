@@ -4,7 +4,10 @@ dx
 			control.GetText()
 		//設值 
 			control.SetText()
-			
+		
+		//client disable
+			control.SetEnabled(false) <-> 後端: control.ClientEnabled = true;
+		
 		//dx自訂client js 屬性
 			server control.JSProperties["cpXXX"] 命名以小寫 cp 開頭
 											     直接指定值
