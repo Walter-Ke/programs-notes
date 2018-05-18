@@ -139,7 +139,8 @@ rebase
 	git pull 
 	
 	
-
+搜尋異動檔案
+	gitk -- 'INXPMS/EQ_Report/VisitingLogReport.aspx'
 	
 	
 	
