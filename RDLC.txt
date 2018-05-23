@@ -16,10 +16,12 @@ ReportViewer.LocalReport.Refresh();
  左邊空白
 	主體 寬度 小於 報表表格寬度  =>  主體空白處 大於 報表表格
 
- 固定欄位：資料表
+ 固定欄位：資料表 
 	資料列/行 群組 -> 進階模式 -> 靜態 -> 屬性 -> fixed data = TRUE, KeepTogether = true
 	欄位寬度：要設成比資料值的長度大，不然移動會造成不一樣寬度重疊
 
+ 每頁顯示標題：
+	資料列/行 -> 進階模式 -> 靜態 -> 屬性 -> RepeatOnNewPage = true
 	
  資料表:
 	

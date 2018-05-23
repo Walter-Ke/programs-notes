@@ -1,53 +1,67 @@
 dx
 	Client: 
+	命名
+		upper camel case (Pascal命名法)
+		
+	屬性
 		//取值 
 			control.GetText()
 		//設值 
 			control.SetText()
 		
-		//client disable
+		//Disable
 			control.SetEnabled(false) <-> 後端: control.ClientEnabled = true;
 		
-		//dx自訂client js 屬性
-			server control.JSProperties["cpXXX"] 命名以小寫 cp 開頭
-											     直接指定值
-		//dx自訂client js，前端使用
-			control.cpXXX 
-			
-		//ASPxListBox 計算項目個數
-			listBox.GetItemCount()
-					
-		//ASPxListBox 取得項目文字
-			listBox.GetItem(i).text
 		
+		//dx自訂client js 屬性
+			須先在server設定
+				server control.JSProperties["cpXXX"] 命名以小寫 cp 開頭
+													 直接指定值
+		    前端使用
+				control.cpXXX 
+
+			
 		//停止postback	
 			e.processOnServer=false;  
-		
+
+	樣式		
 		//不顯示，但元素存在
 			aspxlabel : width=0, height=0
 			aspxtextbox : style="visibility:hidden"
-				
-		//多選清單		
-			radioButtonList: 取得點選index: GetSelectedIndex()
-			  				 清空點選: SetSelectedItem(null)
-						 
-		//前端執行按鈕click
-			btn.DoClick();
-		
-		//前端按鈕html格式<input name="btnname">
-			
-		
 		
 		//設定dx元件樣式，style為HTML DOM Style Object  https://www.w3schools.com/jsref/dom_obj_style.asp
 			ASPxTextBox.GetInputElement().style
 		
+	元件		
+		//ASPxListBox 
+			計算項目個數
+				listBox.GetItemCount()
+					
+			取得項目文字
+				listBox.GetItem(i).text
+			
+		//RadioButtonList 多選清單		
+			取得點選index: GetSelectedIndex()
+			清空點選: SetSelectedItem(null)
+						 
+		//Button
+			執行click動作
+				btn.DoClick();
 		
+			前端按鈕html格式
+				<input name="btnname">
+	
+		//ASPxGridView
+			filter:
+				grid.ClearFilter();
 		
-		
-		//彈跳視窗顯示方法
-			ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = true;
-			ASPxPopupControl1.Hide();  -> server: ShowOnPageLoad = false;
-		
+		//ASPxPopupControl
+			彈跳視窗顯示方法
+				ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = true;
+				ASPxPopupControl1.Hide();  -> server: ShowOnPageLoad = false;
+			設定標題
+				ASPxPopupControl1.SetHeaderText('header');
+			
 	Server:		
 		若callback要執行前端script，無法使用ScriptManager.RegisterStartupScript，需使用dx:ASPxGlobalEvents
 		

@@ -53,8 +53,32 @@ Default.aspx:
 	<asp:Content ID="Content" ContentPlaceHolderID="cphMainContent" runat="server">
 	</asp:Content>	
 	
-
 	
+DataTable
+		//轉成 唯一欄位column1的DataTable，並排序
+		DataTable dt = DataTable.DefaultView.ToTable("true","column1")
+		
+
+DataView
+		//宣告
+		DataView dv = new DataView(dt);
+		
+		//排序
+		dv.sort = "column DESC"
+		
+		//筆數
+		int rowCnt = dv.Count ;
+		
+		//第一列(index=0)的column1的值
+		string rowValue = dv[0]["column1"].ToString().Trim();
+		
+		//尋找column1,column2中的關鍵字值
+		int rowIndex = dv.find(new object{ "column1_value", "column2_value" });
+		if(rowIndex == -1)
+			//not found!
+		
+		
+		
 控制項：
 	//dropDownList加入項目清單
 		List<ListItem> list = new List<ListItem>();
