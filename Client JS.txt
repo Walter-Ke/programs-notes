@@ -4,6 +4,9 @@ dx
 		upper camel case (Pascal命名法)
 		
 	屬性
+		//判斷元件存在與否
+		if( typeof controlInstanceName !== "undefined" ) 
+		
 		//取值 
 			control.GetText()
 		//設值 
@@ -33,6 +36,10 @@ dx
 			ASPxTextBox.GetInputElement().style
 		
 	元件		
+		//ASPxMemo 
+			//尋找enter取代
+				ASPxMemo.replace(/\n/g,'')
+			
 		//ASPxListBox 
 			計算項目個數
 				listBox.GetItemCount()
