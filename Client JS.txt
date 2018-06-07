@@ -22,7 +22,7 @@ dx
 
 			
 		//停止postback	
-			e.processOnServer=false;  
+			e.processOnServer=false; 
 
 	樣式		
 		//不顯示，但元素存在
@@ -32,7 +32,20 @@ dx
 		//設定dx元件樣式，style為HTML DOM Style Object  https://www.w3schools.com/jsref/dom_obj_style.asp
 			ASPxTextBox.GetInputElement().style
 		
-	元件		
+	元件
+		//判斷元件是否存在, 必須以三個條件判斷，尤其是第3個一定要存在!!!!
+		if(typeof ClientInstanceName !== "undefined" && ASPxClientUtils.IsExists(ClientInstanceName) && ClientInstanceName.GetMainElement() ){
+		
+		//ASPxPanel
+			取得顯示與否
+				GetVisible()
+		
+		//ASPxComboBox
+			//設值
+				ASPxComboBox.SetSelectedItem(ddlTypes.FindItemByText(content));
+			//取值
+				ASPxComboBox.GetInputElement().value
+				
 		//ASPxListBox 
 			計算項目個數
 				listBox.GetItemCount()
@@ -50,6 +63,8 @@ dx
 		
 			前端按鈕html格式
 				<input name="btnname">
+				
+			btn.SetEnabled(false); => 會造成無法 postback !!
 	
 		//ASPxGridView
 			filter:
@@ -80,6 +95,9 @@ dx
 		
 jQuery
 	ref: https://ithelp.ithome.com.tw/users/20067050/articles?page=1
+	
+	元素存在 null object 
+		selector.length !==0
 	
 	selector
 		$("元素[屬性1='值1'][屬性2='值2']")
@@ -117,6 +135,58 @@ jQuery
 			.addClass('classname')
 			.removeClass('classname')
 			
+	Event
+			//不適用動態產生的元件
+			$(selector).click(function(event){ });
+			
+			
+			//適用動態產生的元件  jQuery v1.7+
+			$(selector).on(eventName, [childSelector], [ {data} ], [ function(event){} ] );
+			
+				//綁定在document下的動態元件事件 會 work
+				$(document).on("click", "#dynamicElementId", function(event){});
+				
+				//直接綁定動態元件的事件  不一定會work !!!
+				$("#dynamicElementId").on("click", function(event){});
+			
+
+			//阻止事件
+				event.stopPropagation();		//阻止dom tree上一層事件
+				
+				
+				return false; 					//阻止全部dom tree事件
+				等於
+					event.stopPropagation();
+					event.preventDefault();
+					傳回值並停止函式
+				
+				event.stopImmediatePropagation; //阻止全部dom tree事件 
+				
+					<!--常用於很繁雜的程式，同一個物件可能會有重複相同的事件操作-->
+					
+					<div id="TestDiv">
+						<a class="menu" href="http://www.google.com.tw/">Click This</a>
+					</div>
+					<script>
+						$(document).ready(function(){
+						
+							//Click #TestDiv .menu 會顯示 456
+							$("#TestDiv").click(function(){
+								alert("123");
+							});
+							$("#TestDiv .menu").click(function(e){
+								alert("456");
+								e.stopImmediatePropagation();
+							});
+							$("#TestDiv").click(function(){
+								alert("789");
+							});
+							$("#TestDiv .menu").click(function(){
+								alert("321");          
+							});
+						});
+					</script>	
+				
 		
 	.ajax()
 		contentType: 'application/json'    //傳送內容至伺服端的格式
@@ -124,22 +194,62 @@ jQuery
 		data: JSON.stringify(para)		   //傳送至伺服端的參數	
 
 js	
+	//Selector
+		getElementById("id")
+		//元素陣列
+		getElementsByTagName("div")[i]
+		getElementsByClassName("classNmae")[i]
+		
+		
+	//判斷元件是否存在
+		if( typeof element !== undefined )
+	
+	//判斷元件是否存在，且是否有null值
+		if( !element ) 
+	
+	
+	//HTML DOM Style 	https://www.w3schools.com/Jsref/dom_obj_style.asp
+		style.color
+		style.backgroundColor
+		
+	
 	//string to number
-	Number(string) //小數點、整數
+		Number(string) //小數點、整數
 	
 	
 	//判斷數值
 		isNaN(value) === false  為數值
 	
 	
-	//Date判斷格式
-	if(isNaN(Date.parse(value))==true)
-		alert("格式錯誤");
+	//Date
+		//判斷格式
+			if(isNaN(Date.parse(value))==true)
+				alert("格式錯誤");
+		//現在時間型別
+			new Date() 
+		//某一時間點時間型別
+			new Date(date)			
+		//時間比較
+			new Date(time1) < new Date()
+		//日期比較
+			Date.parse(date1) < Date.parse((new Date()).toDateString())
 
+	//事件
+		捕獲(傳遞)  (從document開發觸發，依次往下傳遞，觸發，直到當前元件)
+		element1.addEventListener('click',doSomething2,true)
 		
-	//阻止呼叫此方法的當前事件，繼續執行捕獲傳遞或冒泡傳遞
-		event.stopPropagation();		
+		冒泡(傳遞)  (當前元件觸發事件，依次往上傳遞，觸發，直到document)
+		element2.addEventListener('click',doSomething,false)
+		element1.onclick = doSomething2;
 		
+		
+		//阻止事件，但不會阻止預設行為!!
+			event.stopPropagation();		
+			
+		//阻止預設行為，但不會阻止事件
+			event.preventDefault();
+
+			
 		
 	//顯示yes or no對話方塊
 		if(confirm('msg')){ 

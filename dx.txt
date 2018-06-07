@@ -12,10 +12,25 @@ callback
 
 	只改變呼叫callback的控制項，其餘控制項無法改變值、樣式!!!
 
+	callback後，除了文字方塊可以取得到值外，其餘事件在postback皆無動作!!!
+	
 	
 控制項顯示
 	_init() 可能無法控制顯示與否!!
 	_onload() :  須寫於此方法中，.Visible = false/true
+	
+	
+	
+ASPxPanel
+	Visible = "false"     => 	not redered
+	ClientVisible="false" => 	hide
+		<script>
+			clientPanel.SetVisible(true);
+		</script>
+	
+
+ASPxComboBox
+	ASPxComboBox.Items.IndexOf(ASPxComboBox.Items.FindByText(type));
 	
 	
 gridview控制項
@@ -42,9 +57,9 @@ gridview控制項
 				//group 
 			}
 		
-		.當click group expand/collapse，callback/postback後，會重置，須設定 EnableRowsCache  = "false"  !!
+		.當click, group expand/collapse，callback/postback後，會重置，須設定 EnableRowsCache  = "false"  !!
 		 
-		 一旦設定後，page執行後端，將執行grid_DataBinding(),grid_DataBound() !!
+		 一旦設定後，page後端執行，將先執行grid_DataBinding(),grid_DataBound()，才會執行page_load() !!
 		 
 		 
 		

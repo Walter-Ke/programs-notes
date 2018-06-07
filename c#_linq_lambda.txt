@@ -1,69 +1,66 @@
 Linq 
+查詢運算式（Query Expressions）
 inner join 
 
 	var clients = from c in ctx.Clients
-			  from g in ctx.Gruops
-			  where c.GroupID == g.ID
-			  orderby g.Name
-			  select new 
-			  {
-				c.groupID,
-				c.ComputerName,
-				GroupName = g.Name
-			  };
+				  from g in ctx.Gruops where c.GroupID == g.ID orderby g.Name
+				  select new 
+				  {
+					c.groupID,
+					c.ComputerName,
+					GroupName = g.Name
+				  };
 
 	var clients = from c in ctx.Clients
-			  join g in ctx.Groups
-			  on c.GroupID = g.ID into result
-			  from r in result
-			  orderby r.Name
-			  select new 
-			  {
-				c.groupID,
-				c.ComputerName,
-				GroupName = r.Name
-			  };
+				  join g in ctx.Groups on c.GroupID = g.ID into result
+				  from r in result orderby r.Name
+				  select new 
+				  {
+					c.groupID,
+					c.ComputerName,
+					GroupName = r.Name
+				  };
 			  
 left join
 		
-	var client = from c in ctx.Clients
-				 where c.Status ==1
+	var client = from c in ctx.Clients where c.Status ==1
 				 select new 
 				 {
 					c.groupID,
 					c.ComputerName,
-					GroupName = (from g in ctx.Groups
-								 where g.ID == c.GroupID
-								 select g.Name).FirstOrDefault()
+					GroupName = (from g in ctx.Groups where g.ID == c.GroupID 
+					             select g.Name)
+								.FirstOrDefault()
 				 };
 	
 
 count 
 
-		var result = from c in ctx.Clients
-					 group c by c.Status into r
+		var result = from c in ctx.Clients group c by c.Status into r
 					 orderby r.Count() desceding
-					 select new {
+					 select new 
+					 {
 						status = r.Key,
 						Count = r.Count()
 					 };
 
+					 
 					
-Lambda 
+Method based Query(方法架構查詢)    (使用Lambda 運算式(匿名委派再簡化))
 inner join 		  
 
 	var clients = ctx.Clients.Where(c => c.Status ==1)
-						 .Join(ctx.Groups, 		  //要加入的來源
-							   c => c.GroupID,    //主表要join的值
-							   g => g.ID,         //次表要join的值
-						       (c,g) => new 	  //(c,s)代表將資料集合起來
-							   {
-									c.groupID,
-									c.ComputerNamae,
-									GroupName = g.Name
-							   })
-						 .OrderBy( cg => cg.GroupName)
-						 .ToList();
+							 .Join(ctx.Groups, 		  	//要加入的來源
+										   c => c.GroupID,    //主表要join的值
+										   g => g.ID,         //次表要join的值
+											   (c,g) => new 	  //(c,g)代表將資料集合起來
+													   {
+															c.groupID,
+															c.ComputerNamae,
+															GroupName = g.Name
+													   })
+							 .OrderBy( cg => cg.GroupName)
+							 .ToList();
 	
 left join 
 	
