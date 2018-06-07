@@ -35,16 +35,11 @@ dx
 		//設定dx元件樣式，style為HTML DOM Style Object  https://www.w3schools.com/jsref/dom_obj_style.asp
 			ASPxTextBox.GetInputElement().style
 		
+<<<<<<< HEAD
 	元件
 		//判斷元件是否存在, 必須以三個條件判斷，尤其是第3個一定要存在!!!!
 		if(typeof ClientInstanceName !== "undefined" && ASPxClientUtils.IsExists(ClientInstanceName) && ClientInstanceName.GetMainElement() ){
 		
-		
-		/ASPxMemo 
-			//尋找enter取代
-				ASPxMemo.replace(/\n/g,'')
-			
-				
 		//ASPxPanel
 			取得顯示與否
 				GetVisible()
@@ -55,6 +50,13 @@ dx
 			//取值
 				ASPxComboBox.GetInputElement().value
 				
+=======
+	元件		
+		//ASPxMemo 
+			//尋找enter取代
+				ASPxMemo.replace(/\n/g,'')
+			
+>>>>>>> 7c4f0cac8f559b90d1676edc7511552ec921eee1
 		//ASPxListBox 
 			計算項目個數
 				listBox.GetItemCount()
