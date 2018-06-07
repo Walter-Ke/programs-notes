@@ -39,15 +39,13 @@ dx
 		//判斷元件是否存在, 必須以三個條件判斷，尤其是第3個一定要存在!!!!
 		if(typeof ClientInstanceName !== "undefined" && ASPxClientUtils.IsExists(ClientInstanceName) && ClientInstanceName.GetMainElement() ){
 		
-		
-		/ASPxMemo 
-			//尋找enter取代
-				ASPxMemo.replace(/\n/g,'')
-			
-				
 		//ASPxPanel
 			取得顯示與否
 				GetVisible()
+				
+		/ASPxMemo 
+			//尋找enter取代
+				ASPxMemo.replace(/\n/g,'')
 		
 		//ASPxComboBox
 			//設值
