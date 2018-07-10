@@ -16,7 +16,7 @@ callback
 	
 	
 控制項顯示
-	_init() 可能無法控制顯示與否!!
+	_init() 無法控制顯示與否!!, 
 	_onload() :  須寫於此方法中，.Visible = false/true
 	
 	
@@ -35,6 +35,23 @@ ASPxComboBox
 	
 gridview控制項
 
+	.OnInit:
+		.生命週期，Init事件先執行於其他事件!!
+		.在Init事件中，所有控制項，皆尚未初始化(包含儲存格中的控制項)
+		protected void ddlXXX_Init(object sender, EventArgs e)
+        {
+            if (!this.IsCallback || !this.IsPostBack) return;
+			...
+		}
+		
+	.OnLoad:
+		protected void ddlXXX_Init(object sender, EventArgs e)
+        {
+            //不能用IsCallback, IsPostback判斷，在存檔時會無法取得到控制項的值!!!
+			//if (!this.IsCallback || !this.IsPostBack) return;
+			...
+		}
+		
 	.動態綁定資料來源:
 		
 		.EnableViewState=true , https://www.devexpress.com/Support/Center/p/E321.aspx
@@ -58,8 +75,16 @@ gridview控制項
 			}
 		
 		.當click, group expand/collapse，callback/postback後，會重置，須設定 EnableRowsCache  = "false"  !!
-		 
+		 (gridview不使用datasourceid)
 		 一旦設定後，page後端執行，將先執行grid_DataBinding(),grid_DataBound()，才會執行page_load() !!
 		 
-		 
+		.標題顯示複選勾選
+			foreach (GridViewDataColumn column in grid.Columns)
+            {   
+                 
+                if (column is GridViewDataColumn)
+                {
+                    column.Settings.HeaderFilterMode = HeaderFilterMode.CheckedList;
+                }
+            }		
 		

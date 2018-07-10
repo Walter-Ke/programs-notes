@@ -95,10 +95,14 @@ ReportViewer.LocalReport.Refresh();
 			Enable variable interval : 允許間距變動
 	
 			X軸顯示所有資料，interval(間隔)：1, labelInterval(標籤間隔):1, 主要刻度間隔:1
+			
+			最小值：當「間隔類型」(intervalType)為自動(auto)，且非「純量軸」，則最小值為1(第1個數值)
+			
+			X軸設為時間日期格式：「純量軸」，「間隔」(interval)：1，「間隔類型」(intervalType)：時間格式，「標籤間隔」(labelInterval):1
 	
-	Chart Axis :
+	
 		OffsetLabels:true, LabelAutoFitDisabled : 坐標軸值 上下交錯
-	Chart:
+	
 		DynamicWidth: 動態寬度設定： 1+ ( rownumber("資料集名稱") / 2 ) & "in"
 	
 	值(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)
