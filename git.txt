@@ -124,6 +124,7 @@ rebase
 	git remote add 遠端主機名稱 URL
 	git remote rename 原名稱 修改名稱
 	git remote show 遠端主機名稱	#檢視遠端資訊
+	git remote set-url origin git://new.url.here  修改遠端主機url
 	
 推送
 	git push 遠端主機名稱(origin) 本地端分支名稱 
