@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+		function keyin(){
+        
+            var key = $("input[type='text']").val();
+            //console.log(key);
+
+            if(key.length===0){
+                var containsObj = $("span[id='em']");
+                if( containsObj.length!==0){
+                	containsObj.parent().html(function(){
+                                                          var ori = $(this).text();
+                                                          $(this).empty();
+                                                          return ori;
+                                                        });
+                }
+                return;
+            };
+            
+            var text = $("table[id='tb'] tr td").filter(function(){return $(this).text().indexOf("abc")>=0;});
+            if(text.length ==0) return;
+            var keyContent = "<span id='em' style='background-color:yellow'>"+key+"</span>";
+            text.html(function(){ return $(this).text().replace(key, keyContent );});       
+    	}
+</script>
+</head>
+<body>
+<input type="text" onkeyup="keyin()"/>
+<table id="tb" width="100%">
+	<tr><td>aadbabc</td><td>abcdddd</td><td>abc</td><td>abcoooad</td></tr>
+    <tr><td>abc</td><td>abceee</td><td>abceewqe</td><td>abcqerqe</td></tr>
+    <tr><td>abc</td><td>abcffff</td><td>abcabadcsdf</td><td>abcxzcv</td></tr>
+    <tr><td>abc</td><td>abcgggg</td><td>abchhhhh</td><td>abc</td></tr>
+</table>
+
+</body>
+</html>

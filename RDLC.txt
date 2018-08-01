@@ -107,7 +107,7 @@ ReportViewer.LocalReport.Refresh();
 	
 	值(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)
  
-	
+		
 
  
 	
