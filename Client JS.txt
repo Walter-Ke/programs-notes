@@ -52,7 +52,11 @@ dx
 				ASPxComboBox.SetSelectedItem(ddlTypes.FindItemByText(content));
 			//取值
 				ASPxComboBox.GetInputElement().value
-				
+		
+		//ASPxCheckBox
+			//取值
+				ASPxCheckBox.GetChecked()
+		
 		//ASPxListBox 
 			計算項目個數
 				listBox.GetItemCount()
@@ -64,6 +68,13 @@ dx
 			取得點選index: GetSelectedIndex()
 			清空點選: SetSelectedItem(null)
 						 
+		//ASPxCheckBoxList
+			//取得有勾選項目
+				ASPxClientCheckBoxList.GetSelectedItems()
+			//取消所有勾選
+				ASPxClientCheckBoxList.UnselectAll()
+			//
+			
 		//Button
 			執行click動作
 				btn.DoClick();

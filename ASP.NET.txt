@@ -60,6 +60,9 @@ DataTable
 		
 
 DataView
+		//暫存
+		不能存放在ViewState，無法序列化，會造成異常
+		
 		//宣告
 		DataView dv = new DataView(dt);
 		

@@ -31,10 +31,12 @@ ASPxPanel
 
 ASPxComboBox
 	ASPxComboBox.Items.IndexOf(ASPxComboBox.Items.FindByText(type));
-	
-	
-gridview控制項
+	ASPxComboBox.Items.Insert(0,new DevExpress.Web.ListEditItem(null, null))
 
+ASPxCheckBoxList
+		ASPxCheckBoxList.items[i].Selected = true; //ASPxCheckBoxList每一項value 要不一樣，才不會全部都變true!!
+	
+ASPxGridView
 	.OnInit:
 		.生命週期，Init事件先執行於其他事件!!
 		.在Init事件中，所有控制項，皆尚未初始化(包含儲存格中的控制項)
