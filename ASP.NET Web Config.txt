@@ -17,5 +17,16 @@ Web.config
 							  此方法稱之為身份模擬(Impersonation)
 							  
 							  <identity impersonate="true" userName="username" password="pwd">
+
 							  
-								
+		<sessionState cookieless="false" mode="StateServer" stateConnectionString="tcpip=127.0.0.1:42424" stateNetworkTimeout="28800" timeout="240" />							
+					cookieless: 以cookies存放
+					mode: 與IIS分離，獨立
+					stateNetworkTimeout: (單位:秒)，StateServer與IIS連線到期時間
+					timeout: (單位:分)，session清除時間
+
+					
+		<compilation debug="false" targetFramework="4.0">
+		<httpRuntime  executionTimeout="3600"   />	
+					executionTimeout: ASP.NET 可執行的時間
+					設定 executionTimeout 時，其 compilation 的 debug 屬性也必須設為 false 才有用。	
