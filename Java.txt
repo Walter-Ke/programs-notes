@@ -1,0 +1,10 @@
+getClass().getCanonicalName()  	//package name + class name	com.test.Apple
+getClass().getName()			//package name + class name	com.test.Apple
+getClass().getSimpleName()		//class name				Apple
+
+
+//JUnit 
+Assert.assertEquals(測試函數 a，預測值 b)	//評斷兩個參數相等，a與b必須是相同的基礎型別或兩者皆是物件
+	  .assertTrue(boolean)				//評斷給定的情況是真值
+	  .assertNull(Object)				//評斷一個物件是空值(null)
+	  .assertSame(Object, Object)		//評斷兩個物件參考到相同的物件
