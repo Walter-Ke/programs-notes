@@ -1,0 +1,64 @@
+正式/測試環境的權限，by AD帳號向 dba 申請
+
+(1)lock
+(a)找出sid&serial(sid_serial#)
+
+select
+    substr(l.os_user_name||'/'||l.oracle_username,1,12) username,
+    decode(l.locked_mode,
+             1,'No Lock',
+             2,'Row Share',
+             3,'Row Exclusive',
+             4,'Share',
+             5,'Share Row Excl',
+             6,'Exclusive',null) locked_mode,
+    substr(s.status,1,8) status,
+    substr(o.owner||'.'||o.object_name,1,35) owner_object,
+    substr(to_char(l.session_id)||','||to_char(s.serial#),1,12) sid_serial#,
+    l.process,
+    p.spid
+from
+    v$locked_object l,
+    all_objects      o,
+    v$session       s,
+    v$process       p
+where
+    l.object_id  = o.object_id
+and l.session_id = s.sid
+and s.paddr      = p.addr
+--and s.status    != 'KILLED'
+order by o.object_name;
+
+(b)執行
+
+exec sys.kill_session (646,4035);
+
+
+(2)找正在run的job
+(a)先把job offline
+
+(b)找SID
+
+SELECT r.sid, r.job, j.log_user, j.what, r.this_date, substr(r.this_sec,1,8), r.failures
+FROM dba_jobs_running r, dba_jobs j
+WHERE r.job = j.job;
+
+(c)依SID到session brower找SerialNum
+
+(d)執行
+
+exec sys.kill_session (573,54077);
+
+
+-----------------------
+Sequence NoCache
+
+原文網址：https://read01.com/PMQEmB.html
+
+SELECT s.username, w.sid, w.event, w.seq#,
+      w.state, w.wait_time_micro, w.p1, w.p2, w.p3
+FROM V$SESSION_WAIT w, V$SESSION s 
+WHERE w.sid = s.sid
+AND w.event like ('%row cache lock%')
+and s.username = 'IPM_AP'
+ORDER BY wait_time_micro desc, event;
