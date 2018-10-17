@@ -1,4 +1,4 @@
-Linq 
+Linq   							.net4.0之後才支援Oracle
 	Language-Integrated Query
 	整合式查詢語言
 	一系列的擴充方法, 藉由統一的資料存取模型，以相同的模式存取各種不同型態的資料來源
@@ -8,6 +8,12 @@ Linq
 	2. 第一個參數必須用 this 關鍵字修飾
 	3. 不可以定義在巢狀類別或泛型類別中
 	
+
+標準查詢運算子(Standard Query Operators)
+應用於集合類別的運算子，它對集合實作了篩選、組合、排序..等等的運算功能，
+像是Select、Where、OrderBy...等方法，
+而這些方法就是運作於IEnumerable<T>、IQueryable<T>之上
+
 	
 查詢運算式（Query Expressions）
 inner join 

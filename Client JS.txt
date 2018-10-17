@@ -87,7 +87,7 @@ dx
 		//ASPxGridView
 			filter:
 				grid.ClearFilter();
-		
+				grid.GetFilterSelectedValues("Column_name") //return List<>; 判斷有無選取某一列
 		//ASPxPopupControl
 			彈跳視窗顯示方法
 				ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = true;

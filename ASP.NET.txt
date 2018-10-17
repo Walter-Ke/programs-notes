@@ -1,3 +1,6 @@
+./text.html    		//表同一層目錄下的 text.html 檔案
+~/dir/text.html		//省略前面目錄？
+
 連線字串
 	WebConfigurationManager.ConnectionStrings["ConnectionStrings_Name"].ToString();
 

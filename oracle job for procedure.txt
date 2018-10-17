@@ -1,8 +1,11 @@
 查詢執行中job
 select * from dba_jobs_running;
+
 刪除job session
 select SID,SERIAL# from V$Session where SID='281';
-alter system kill session '281, 48389';
+
+alter system kill session '281, 48389'; -> 沒有權限改執行以下命令
+exec sys.kill_session (676,5241);
 
 
 查詢 job_queue_processes : oracle 允許執行的最大任務數量
