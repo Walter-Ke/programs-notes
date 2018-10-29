@@ -103,7 +103,7 @@ ReportViewer.LocalReport.Refresh();
 	
 		OffsetLabels:true, LabelAutoFitDisabled : 坐標軸值 上下交錯
 	
-		DynamicWidth: 動態寬度設定： 1+ ( rownumber("資料集名稱") / 2 ) & "in"
+		DynamicWidth: 動態寬度設定： 1+ ( rownumber("資料集名稱") / 2 ) & "in", 最大寬度為455 in, 超過將顯示錯誤：「值不為null，參數名稱:format」
 	
 	值(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)
  

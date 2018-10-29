@@ -49,10 +49,13 @@ dx
 		
 		//ASPxComboBox
 			//設值
-				ASPxComboBox.SetSelectedItem(ddlTypes.FindItemByText(content));
+				ASPxComboBox.SetSelectedItem(ASPxComboBox.FindItemByText(content));
 			//取值
 				ASPxComboBox.GetInputElement().value
-		
+			//取index
+				ASPxComboBox.GetSelectedIndex()
+			
+				
 		//ASPxCheckBox
 			//取值
 				ASPxCheckBox.GetChecked()
@@ -146,6 +149,11 @@ jQuery
 			});
 	
 	Attribute
+		判斷有無屬性
+			var attr = e.attr("name");
+			if(typeof attr !== typeof undefined && attr !== false){
+				//has attribute
+			}
 		移除css屬性值
 			.css('display','')
 			
