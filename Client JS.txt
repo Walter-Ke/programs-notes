@@ -298,8 +298,17 @@ js
 	<a href=javascript:void(function_name()) />
 	
 CSS
-	display:none
+	display:none;
 		js無法找到內容元素
+	visibility: hidden;	
+		
 		
 	有寫width:100% 會占滿網頁寬度
 	沒有寫，會自動調整
+	
+	div 浮動靠右
+	底：position:absolute;
+	上：position:relative;z-index:1;float:right;
+	
+	button 四角圓弧
+	border-radius:5pt;
