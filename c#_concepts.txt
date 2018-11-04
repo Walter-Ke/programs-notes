@@ -68,6 +68,10 @@
 	//string to dateTime
 		Convert.ToDateTime(string)
 
+DataTable:
+	dt.Columns[0].AllowDBNull = true; //defaultValue = false, 若含有空值，需設成true
+	dt.Columns[0].DefaultValue = DBNull.Value; //欄位值預設為null
+
 		
 序列化：
 	[Serializable] 		  //把物件變成可在網路上傳輸的位元組流		
