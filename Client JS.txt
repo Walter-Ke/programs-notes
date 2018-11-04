@@ -49,10 +49,13 @@ dx
 		
 		//ASPxComboBox
 			//設值
-				ASPxComboBox.SetSelectedItem(ddlTypes.FindItemByText(content));
+				ASPxComboBox.SetSelectedItem(ASPxComboBox.FindItemByText(content));
 			//取值
 				ASPxComboBox.GetInputElement().value
-		
+			//取index
+				ASPxComboBox.GetSelectedIndex()
+			
+				
 		//ASPxCheckBox
 			//取值
 				ASPxCheckBox.GetChecked()
@@ -87,7 +90,7 @@ dx
 		//ASPxGridView
 			filter:
 				grid.ClearFilter();
-		
+				grid.GetFilterSelectedValues("Column_name") //return List<>; 判斷有無選取某一列
 		//ASPxPopupControl
 			彈跳視窗顯示方法
 				ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = true;
@@ -146,6 +149,11 @@ jQuery
 			});
 	
 	Attribute
+		判斷有無屬性
+			var attr = e.attr("name");
+			if(typeof attr !== typeof undefined && attr !== false){
+				//has attribute
+			}
 		移除css屬性值
 			.css('display','')
 			
@@ -290,8 +298,17 @@ js
 	<a href=javascript:void(function_name()) />
 	
 CSS
-	display:none
+	display:none;
 		js無法找到內容元素
+	visibility: hidden;	
+		
 		
 	有寫width:100% 會占滿網頁寬度
 	沒有寫，會自動調整
+	
+	div 浮動靠右
+	底：position:absolute;
+	上：position:relative;z-index:1;float:right;
+	
+	button 四角圓弧
+	border-radius:5pt;

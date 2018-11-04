@@ -17,12 +17,14 @@
 修飾詞：
 	yield return 
 		配合foreach呼叫getDataByYield()，呼叫時才執行方法，回傳Ienumerable值, 回傳後繼續執行
+		var list = getEvenNumByYield(myList);
+		foreach(var l in list)
+		{
+			sum += l;
+		}
 		static IEnumerable<int> getDataByYield(IEnumerable<int> collection){
 			foreach(var i in collection){
-				if(i % 2 == 0) 
-					yield return i;
-				else
-					yield break;
+				if(i % 2 == 0) yield return i;
 			}
 		}
 		限制:
@@ -72,6 +74,38 @@ DataTable:
 	dt.Columns[0].AllowDBNull = true; //defaultValue = false, 若含有空值，需設成true
 	dt.Columns[0].DefaultValue = DBNull.Value; //欄位值預設為null
 
+		
+委派(delegate)： https://docs.microsoft.com/zh-tw/dotnet/csharp/tour-of-csharp/delegates
+	A.
+		1.函式(方法)的參考
+		2.將函式(方法)當作實體(instance)，可指定給變數，當作參數傳遞，或是直接引用(實體化)
+		3.類似c函式指標，不同之處在於委派是物件導向且型別安全
+	B.
+		1.宣告，public delegate type function_name(parameters)
+			    public delegate double Function(double x);
+		2.只要與宣告的回傳型別(type)、參數(parameters)的資料型別、個數相同的函式就可用來參考 
+		3.靜態(static)方法、執行個體方法(new出來的物件方法)，都可用來參考
+				public static double[] Apply(double[] a, Function f){
+					double[] result = new double[a.Length];
+					for (int i = 0; i < a.Length; i++) result[i] = f(a[i]);
+					return result;
+				}
+				double[] sines = Apply(a, Math.Sin);
+				Multiplier m = new Multiplier(2.0);
+				double[] doubles =  Apply(a, m.Multiply);
+		4.匿名函式建立委派
+				double[] doubles =  Apply(a, (double x) => x * 2.0);
+		5.直接引用委派(實體化)
+				public double test(double x){}
+				Function function = new Function(test);	
+				function.Invoke(); //等於 function();
+	C.事件
+		1.事件宣告: [存取修飾詞] event 委派方法 事件名稱 
+				public delegate void EventHandler(object s, EventArgs e);
+				public void handler(object s, EventArgs e){}
+			--->public event EventHandler OnEvent;<---
+				OnEvent += new EventHandler(handler); //委派實體化指向於事件
+				OnEvent(this, null);
 		
 序列化：
 	[Serializable] 		  //把物件變成可在網路上傳輸的位元組流		
