@@ -105,7 +105,8 @@ ReportViewer.LocalReport.Refresh();
 	
 		DynamicWidth: 動態寬度設定： 1+ ( rownumber("資料集名稱") / 2 ) & "in", 最大寬度為455 in, 超過將顯示錯誤：「值不為null，參數名稱:format」
 	
-	
+		Y軸值為整數設定：軸屬性->軸選項->間隔(Interval) fx = IIF(MAX(Fields!DataField.Value)<4,1,0)
+		
 	圖表區域：
 		
 		(設計畫面)圖表區域右鍵->圖表->數列屬性：數列資料/軸和圖表區域/標記/圖例/動作
@@ -117,6 +118,13 @@ ReportViewer.LocalReport.Refresh();
 		圖表的位置/寬度/高度：(最右方)圖表區域屬性->CustomInnerPlotPosition/CustomPosition
 		
 		長條圖(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)	
+		
+		1個圖表，分段曲線圖-群組數列欄位與X軸欄位相同
+		
+		1個圖表，2種類型圖-群組直方圖(多個)+曲線圖(一個)：(設計畫面-圖表區域內的上方)新增一數列(for曲線圖)，
+						   數列屬性->數列資料->值欄位 fx =Int(SUM(Fields!Value.Value,"Chart1_CategoryGroup1"))，可為加總(SUM)或平均(AVG)
+						   曲線圖的圖例，只顯示一條(可能會因群組中的數量有多個，將多個曲線，改成只顯示一條，即圖例就顯示一個)
+						   數列屬性->可見性->依據運算式顯示或隱藏 fx = iif(fields!GroupData.Value=FIRST(Fields!GroupData.Value,"Group"),false,true)
 		
 		2個圖表：(設計畫面)白色處右鍵->加入新的圖表區域，
 				 新增數列(可自訂單一數字為固定y值)，

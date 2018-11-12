@@ -60,6 +60,7 @@
 	git reset --soft "HEAD^"	#刪除最近一次commit，但保留異動內容
 	
 	git reset --hard ORIG_HEAD	#還原異動上一次的commit
+	git reset --merge ORIG_HEAD #還原上次的COMMIT 但不清空工作區，(未異動尚未git add的檔案將保留)
 	git reflog					#列出所有的異動head
 
 
