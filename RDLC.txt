@@ -5,6 +5,8 @@ ReportViewer.LocalReport.DataSources.Clear();
 ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("dataSet_Name",dataTable));
 ReportViewer.LocalReport.Refresh();
 
+多個RDLC檔，共用一個ReportViewer，若有RDLC檔的參數不一樣，則會有錯誤訊息!!
+
 
  只顯示一頁：
 	報表 屬性 -> InteractiveSize. Height : 0
@@ -119,17 +121,18 @@ ReportViewer.LocalReport.Refresh();
 		
 		長條圖(bar)的寬度：PointWidth=0.9  (設成1會與相鄰值無空隙)	
 		
-		1個圖表，分段曲線圖-群組數列欄位與X軸欄位相同
-		
 		1個圖表，2種類型圖-群組直方圖(多個)+曲線圖(一個)：(設計畫面-圖表區域內的上方)新增一數列(for曲線圖)，
 						   數列屬性->數列資料->值欄位 fx =Int(SUM(Fields!Value.Value,"Chart1_CategoryGroup1"))，可為加總(SUM)或平均(AVG)
 						   曲線圖的圖例，只顯示一條(可能會因群組中的數量有多個，將多個曲線，改成只顯示一條，即圖例就顯示一個)
 						   數列屬性->可見性->依據運算式顯示或隱藏 fx = iif(fields!GroupData.Value=FIRST(Fields!GroupData.Value,"Group"),false,true)
 		
 		2個圖表：(設計畫面)白色處右鍵->加入新的圖表區域，
-				 新增數列(可自訂單一數字為固定y值)，
-				 (設計畫面)點選圖表區域右鍵->圖表區域屬性->對齊->對齊圖表區域:Default(第1個圖表區域)
-				 
+						   新增數列：數列屬性->數列資料：可自訂單一數字為固定y值(由sql提供，select 0.5 as column，因欄位須為其中的欄位，其他欄位值才可被讀取)，
+									 軸和圖表區域->圖表區域:選擇新增的圖表區域名稱	
+						   上下圖對齊：點選新的圖表區域右鍵->圖表區域屬性->對齊->對齊圖表區域:Default(第1個圖表區域)
+						   上圖X軸：點選(上方)舊的圖表區域右鍵->「顯示類別目錄軸」可取消勾選
+		
+		1個圖表，多個分段曲線- X軸的類別，也加入在數列群組，數列的值不可設為：SUM(欄位)，要設為：欄位!
 	
  List(清單)：
 	可內含多種物件，若要加入圖表，須先在建立圖表前，在「資料列群組」的「詳細清單」的右鍵「群組屬性」，畫面「一般」下方，加入群組對象，才能將資料集欄位加入圖表中!

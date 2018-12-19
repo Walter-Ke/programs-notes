@@ -19,7 +19,9 @@ callback
 	_init() 無法控制顯示與否!!, 
 	_onload() :  須寫於此方法中，.Visible = false/true
 	
-	
+生命週期：
+	OnInit: 無法設定/取得控制項的值
+	OnLoad: 
 	
 ASPxPanel
 	Visible = "false"     => 	not redered
@@ -53,6 +55,10 @@ ASPxGridView
 			//if (!this.IsCallback || !this.IsPostBack) return;
 			...
 		}
+
+	.DataBind()
+		以List<Dynamic>或DataTable繫結，若有時間欄位，可能會造成異常(前端js出錯)，須使用強型別泛型並將時間欄位宣告datetime型別
+		
 		
 	.動態綁定資料來源:
 		

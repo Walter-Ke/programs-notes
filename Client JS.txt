@@ -54,7 +54,10 @@ dx
 				ASPxComboBox.GetInputElement().value
 			//取index
 				ASPxComboBox.GetSelectedIndex()
-			
+			//設index
+				ASPxComboBox.SetSelectedIndex(index)
+			//click to reder the reportviewer(RDLC)
+				UseSubmitBehavior="False" //若不加此設定，client Script會出現錯誤!
 				
 		//ASPxCheckBox
 			//取值
@@ -91,6 +94,7 @@ dx
 			filter:
 				grid.ClearFilter();
 				grid.GetFilterSelectedValues("Column_name") //return List<>; 判斷有無選取某一列
+		
 		//ASPxPopupControl
 			彈跳視窗顯示方法
 				ASPxPopupControl1.Show();  -> server: ShowOnPageLoad = true;
