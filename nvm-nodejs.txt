@@ -1,0 +1,14 @@
+#install 64位元
+nvm install 10.14.2 64
+
+# 列出可用node.js版本
+nvm list 
+
+#切換使用node.js某版本
+nvm use 10.14.2
+
+#安裝gulp
+npm install gulp-cli -g
+
+
+C:\Users\walter.ke\AppData\Roaming\npm-cache\_logs\2018-12-24T06_46_52_520Z-debug.log
