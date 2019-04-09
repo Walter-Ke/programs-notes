@@ -145,10 +145,17 @@ jQuery
 		尋找上一層最近的父元素
 			.closest()
 		
+		尋找符合的元素及子元素
+			.find()
+		
 		find('tr:eq(0)').text()
 		find('td:eq(0)').text()	
 		
-		$element.map(function(val){
+		尋找子元素但不含其子元素(子子元素)
+			.children()
+		
+		整個html中符合的元素，依map內的function運算再傳回
+		$selector.map(function(val){
 				return 
 			});
 	

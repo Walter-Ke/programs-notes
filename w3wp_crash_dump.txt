@@ -1,0 +1,12 @@
+echo on
+set str=HKLM\SOFTWARE\Microsoft\Windows\Windows Error Reporting\
+set dump="d:\dump\"
+set dumpAP="d:\dump\AP"
+mkdir %dump%
+mkdir %dumpAP%
+rem set 2008r2 User-Mode Dumps env useing w3wp.exe
+reg add "%str%" LocalDumps /v /f
+set str=%str%LocalDumps\w3wp.exe
+reg add "%str%" /t REG_EXPAND_SZ /v DumpFolder /d %dumpAP% /f
+reg add "%str%" /t REG_DWORD /v DumpCount /d 5 /f
+reg add "%str%" /t REG_DWORD /v DumpType /d 2 /f
