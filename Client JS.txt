@@ -56,6 +56,10 @@ dx
 				ASPxComboBox.GetSelectedIndex()
 			//設index
 				ASPxComboBox.SetSelectedIndex(index)
+			//清空值
+				ASPxComboBox.SetText(null)
+			//清空items
+				ASPxComboBox.ClearItems()
 			//click to reder the reportviewer(RDLC)
 				UseSubmitBehavior="False" //若不加此設定，client Script會出現錯誤!
 				
@@ -69,6 +73,9 @@ dx
 					
 			取得項目文字
 				listBox.GetItem(i).text
+			
+			新增一筆資料，位置第一筆
+				listBox.InsertItem(0, "rrr")
 			
 		//RadioButtonList 多選清單		
 			取得點選index: GetSelectedIndex()
@@ -101,7 +108,19 @@ dx
 				ASPxPopupControl1.Hide();  -> server: ShowOnPageLoad = false;
 			設定標題
 				ASPxPopupControl1.SetHeaderText('header');
-			
+	事件
+		function OnGridBeginCallback(s, e) {
+            if (e.command == 'STARTEDIT') {
+                //Your code here when start editing
+            }else if (e.command == 'ADDNEWROW') {
+                //Your code here when adding a new row
+            }else if (e.command == 'UPDATEEDIT') {
+                //Your code here when the Update button is clicked
+            }else if (e.command == 'DELETEROW') {
+                //Your code here when the Delete button is clicked
+            }
+            //and so on...
+        }
 	Server:		
 		若callback要執行前端script，無法使用ScriptManager.RegisterStartupScript，需使用dx:ASPxGlobalEvents
 		
@@ -144,12 +163,19 @@ jQuery
 	Traverse
 		尋找上一層最近的父元素
 			.closest()
+			
+		parent() 只往上查找一層
+		closest() 往上查找 只要找到符合條件的 就停止
+		parents() 往上查找 不停止 找出所有符合條件的
 		
-		尋找符合的元素及子元素
+		往下尋找符合的元素及子元素
 			.find()
 		
 		find('tr:eq(0)').text()
 		find('td:eq(0)').text()	
+		
+		尋找tr子元素但不含其tr子元素(子子元素)
+		$("tr:nth-child(1)").siblings().eq(index)
 		
 		尋找子元素但不含其子元素(子子元素)
 			.children()
@@ -158,6 +184,8 @@ jQuery
 		$selector.map(function(val){
 				return 
 			});
+			
+			
 	
 	Attribute
 		判斷有無屬性
@@ -323,3 +351,16 @@ CSS
 	
 	button 四角圓弧
 	border-radius:5pt;
+	
+	word-wrap:break-word 
+	是用来决定允不允许单词内断句的，如果不允许的话长单词就会溢出。
+	最重要的一点是它还是会首先尝试挪到下一行，看看下一行的宽度够不够，
+	不够的话就进行单词内的断句。
+	
+	word-break:break-all	
+	直接进行单词内的断句,更节省空间
+	
+	共同点是都能把长单词强行断句
+	不同点
+	word-wrap:break-word，会首先起一个新行来放置长单词，新的行还是放不下这个长单词，则会对长单词进行强制断句；
+	word-break:break-all，不会把长单词放在一个新行里，当这一行放不下的时候就直接强制断句

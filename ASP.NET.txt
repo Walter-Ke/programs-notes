@@ -1,6 +1,11 @@
 ./text.html    		//表同一層目錄下的 text.html 檔案
 ~/dir/text.html		//省略前面目錄？
 
+URL encode						decode
+	Uri.EscapeDataString() 		Uri.UnescapeDataString
+js
+	encodeURIComponent			decodeURIComponent
+
 連線字串
 	WebConfigurationManager.ConnectionStrings["ConnectionStrings_Name"].ToString();
 
@@ -98,7 +103,15 @@ DataView
 		//dropDownList選取某個Index(效能較好)
 		ddlControl.SelectIndex = ddlControl.Items.IndexOf(ListItem);
 		ddlControl.SelectIndex = ddlControl.Items.IndexOf(ddlControl.Items.FindByValue("value"));
+		
+	//ComboBox
+	DataBind()時，若有指定TextFiled、ValueFiled且不同，
+	則取文字(Text)，必須是ComboBox.SelectedItem.Text
+	ComboBox.Text 會是 Value 
 
+	DevExpress的ComboBox
+	ComboBox.Text 會是 文字(Text)非Value
+	
 UpdatePanel:
 	AsyncPostBackTrigger & ChildrenAsTriggers="false" => 
 		can be used to specify which controls inside UpdatePanel should call back rather than post back

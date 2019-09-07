@@ -152,6 +152,32 @@ workingDirectory				stagingArea					LocalRepository
 					reset HEAD					revert HEAD			
 					
 							
- 
- 
- 
+##目錄切換到 .git/objects/ 
+find ?? -type f | sed 's!/!!' | git cat-file --batch | grep --binary-files=text pattern
+;
+#####未測試正常######
+{
+    git rev-list --objects --all --grep="AlarmMsgTrendProvider"
+    git rev-list --objects -g --no-walk --all --grep="AlarmMsgTrendProvider"
+    git rev-list --objects --no-walk --grep="AlarmMsgTrendProvider" \
+        $(git fsck --unreachable |
+          grep '^unreachable commit' |
+          cut -d' ' -f3)
+} | sort | uniq
+;
+set -e
+cd "$(git rev-parse --git-dir)"
+find objects/pack -name 'pack-*.idx' | while read p ; do
+    git show-index < $p | cut -f 2 -d ' '
+done
+find objects/ \
+    | egrep '[0-9a-f]{38}' \
+    | grep -v /pack/ \
+    | perl -pe 's:^.*([0-9a-f][0-9a-f])/([0-9a-f]{38}):\1\2:' \
+;
+for blob in $(git fsck --lost-found | awk '$2 == "blob" { print $3 }' | (find ?? -type f | sed 's!/!!' | git cat-file --batch | grep --binary-files=text pattern)); do git cat-file -p $blob > $blob.txt; done
+;
+git cat-file -p 79cfa019bfade106baa9a4e9e0abb1e7fff05fb8
+git cat-file -p 17504b7f68c8cc1af3624304e0c6fa0756d7451d
+git cat-file -p c365c0df62e4b0316aca2f31559de63de9a150bc > EQDownAlarmMsgTrend.aspx.cs
+git cat-file -p ae67a4a4609eb903993b1c3bb6ce4628141c4b70 > Entity_EQDownAlarmMsgTrend.cs
